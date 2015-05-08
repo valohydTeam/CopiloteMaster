@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/buttonsContactLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/removeContactButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:lines="2"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="@string/delete_contacts"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/addContactButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:lines="2"
+            android:padding="5dp"
+            android:text="@string/add_contact"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/smsGroupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:lines="2"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="Envoi SMS groupé"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/contactList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonsContactLayout"
+        android:layout_alignParentTop="true"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5dp"
+        android:padding="5dp" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/no_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonsContactLayout"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="@string/no_contacts"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

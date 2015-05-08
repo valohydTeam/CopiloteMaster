@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+   <!--  <PreferenceCategory android:title="@string/pointage_time" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefUseNotif"
+            android:summary="@string/settings_notifs"
+            android:title="@string/notifications" >
+        </CheckBoxPreference>
+    </PreferenceCategory> -->
+    <PreferenceCategory android:title="@string/times_title" >
+        <EditTextPreference
+            android:defaultValue="@string/url_ffsa"
+            android:key="prefHomepage"
+            android:summary="@string/homepage_settings"
+            android:title="@string/homepage_titre_settings" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/menu_help" >
+        <Preference
+            android:key="prefFirstHelp"
+            android:summary="@string/first_help_pref"
+            android:title="@string/first_help_pref_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen><!-- From: file:/C:/Users/valen_000/StudioProjects/CopiloteMaster/app/src/main/res/xml/settings.xml -->

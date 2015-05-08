@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Titre app -->
+    <string name="app_name">Copilote Master</string>
+    <!-- Titres tabs -->
+    <string name="times_title">Timetable</string>
+    <string name="contacts_title">Quick contacts</string>
+    <string name="chrono_title">Timer</string>
+    <string name="navigation_title">Map</string>
+    <string name="meteo_title">Weather</string>
+    <string name="horaire_title">Checkpoint</string>
+
+    <!-- Quick messages -->
+    <string name="quick_message_ok">SS OK</string>
+    <string name="quick_message_pb_voiture">Something wrong with the car, need repair</string>
+    <string name="quick_message_sortie_route">Off road in SS</string>
+    <string name="quick_message_crevaison">Puncture in SS</string>
+    
+    <!-- Menu -->
+    <string name="menu_settings">Settings</string>
+    <string name="close_app">Exit</string>
+    <string name="menu_stop_pointage">Reset checkpoint</string>
+    <string name="menu_refresh_web">Refresh</string>
+    <string name="menu_about">About</string>
+    <string name="menu_help">Help</string>
+
+    <!-- Messages -->
+    <string name="gps_off">GPS disabled. Do you want to enable it ?</string>
+    <string name="gps_settings">Go to settings</string>
+    <string name="resume_chrono">Resume</string>
+    <string name="choice_messages_dialog_title">Choose message type</string>
+    <string name="quick_messages_dialog_title">Quick Messages</string>
+    <string name="stop_chrono">Stop</string>
+    <string name="reset_chrono">Reset</string>
+    <string name="start_chrono">Start</string>
+    <string name="erreur_suppression_contact">Error deleting contact</string>
+    <string name="contact_existant">Contact already exists !</string>
+    <string name="poi_parc_ferme">Closed parc</string>
+    <string name="poi_parc_assistance">Assistance parc</string>
+    <string name="poi_depart_es">Start SS</string>
+    <string name="poi_arrivee_es">Arrival SS</string>
+    <string name="poi_divers">Misc</string>
+    <string name="aucun_contacts">No quick contacts !</string>
+    <string name="titre_choix_contact">Choose contact</string>
+    <string name="share_radar">Share radar !</string>
+    <string name="envoi_sms_title">Send sms</string>
+    <string name="confirmation_envoi_sms">"Send radar to following numbers : "</string>
+    <string name="message_sms">Radar on liaison !</string>
+    <string name="poi_title">Choose POI type</string>
+    <string name="erase_poi">Erase this POI</string>
+    <string name="navigate_to">Navigate to this point</string>
+    <string name="contact_separator">\\n\\t</string>
+    <string name="send_to">"SMS sent to "</string>
+    <string name="sms_error">SMS not sent !</string>
+    <string name="stop_pointage">Stop checkpoint</string>
+    <string name="confirm_stop_pointage">Are you sure you want to stop the checkpoint ?</string>
+    <string name="unknown">NC</string>
+    <string name="url_ffsa">http://www.ffsa.org</string>
+    <string name="change_home_title">Change homepage</string>
+    <string name="message_homepage">"Do you want to replace the homepage with this link ? : "</string>
+    <string name="pointage_title_notif">Checkpoint</string>
+    <string name="late_pointage_title">Late Checkpoint !</string>
+    <string name="developpers">Developpers :</string>
+    <string name="thanksTo">Thanks to :</string>
+    <string name="contact">Contact :</string>
+    <string name="contact_mail">contact@valohyd.com</string>
+    <string name="part_time">Split</string>
+    <string name="back_to_app">Click to get back to the application</string>
+    <string name="delete_contacts">Delete selected</string>
+    <string name="add_contact">Add contact</string>
+    <string name="no_contacts">No quick contacts !</string>
+    <string name="unit_kmh">km/h</string>
+    <string name="accuracy">Accuracy : </string>
+    <string name="set_hour">Set time</string>
+    <string name="pointage_time">Checkpoint time</string>
+    <string name="imparti_time">Given time</string>
+    <string name="set_imparti_time">Set given time</string>
+    <string name="finish_hour">Arrival hour</string>
+    <string name="remaining_time">Remaining time</string>
+    <string name="settings_notifs">Enable/Disable checkpoint notifications</string>
+    <string name="notifications">Notifications</string>
+    <string name="homepage_settings">Allow you to change the homepage for the timetable view</string>
+    <string name="first_help_pref">Click here to display first help</string>
+    <string name="homepage_titre_settings">Change homepage</string>
+    <string name="first_help_pref_title">First help</string>
+    <string name="quit_message">Pressed back again to exit</string>
+    
+    <string name="hint_meteo">City</string>
+
+    <!-- help -->
+    <string name="help_first_user_title">How to use the application ?</string>
+    
+    <string name="help_first_user_par1">Welcome to\nCopilote Master !</string>  
+    <string name="help_first_user_par1_1">This application contains 6 tabs : </string>
+    <string name="help_first_user_tab_horaire">Checkpoint : to check your timing operations</string>
+    <string name="help_first_user_tab_navigation">Map : to retrieve you on a map, know the current real speed on the road and share speed camera with quick contacts</string>
+    <string name="help_first_user_tab_chrono">Chronometer : to calculate time of the stage</string>
+    <string name="help_first_user_tab_temps">Timetables : check offical time on FFSA website or others</string> 
+    <string name="help_first_user_tab_meteo">Weather forecast : know the weather where you are or anywhere else hour by hour and for 7 days</string> 
+    <string name="help_first_user_tab_contacts">Quick contacts : call or send with predefined contacts</string>
+    
+    <string name="help_first_tab_name">Checkpoint tab</string>
+    <string name="help_first_tab_content">This tab allows you to calculate efficiently the time of your next checkpoint.You can close the application, a notification will indicate you the remaining time </string>
+    
+	<string name="help_second_tab_name">Map tab</string>
+    <string name="help_second_tab_content">This tab allows you to open a map, find your position and know your real speed. You can also add POI (Point of interest) on this map and start the GPS navigation to this point (using Google Navigation).</string>
+    
+    <string name="help_third_tab_name">Timer tab</string>
+    <string name="help_third_tab_content">This tab allows you to use a classic timer (pause, split times, stop, ...).</string>
+    
+    <string name="help_fourth_tab_name">Timetable tab</string>
+    <string name="help_fourth_tab_content">This tab allows you to access the FFSA website (or a website of your choice) to check the official results.</string>
+    
+    <string name="help_fifth_tab_name">Weather tab</string>
+    <string name="help_fifth_tab_content">Go to this tab to check the weather of your location, or any other city.</string>
+    
+    <string name="help_sixth_tab_name">Quick contacts tab</string>
+    <string name="help_sixth_tab_content">This tab allows you to manage and access your quick contacts (SMS, calls).</string>
+    
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="close">Close</string>
+    
+    <string name="message_google_maps_introuvable">Google Maps not installed ! Please download it from Google Play to be able to use the navigation feature.</string>
+    
+    <string name="help_map_1">Click on this button to center the map to your position</string>
+    <string name="help_map_2">Here, your real speed is displayed with the current GPS precision</string>
+    <string name="help_map_3">Long click on the map to add a POI (e.g. start SS, assitance parc, ...)</string>
+    <string name="help_map_4">This button allows you to share a radar on the road with your friends</string>
+    <string name="help_map_5">Click on this button to switch the GPS status on the phone settings</string>
+    <string name="help_pointage_1">Enter here the checkpoint real time</string>
+    <string name="help_pointage_2">Enter here the given time to reach the next checkpoint</string>
+    <string name="help_pointage_3">The arrival time is automatically calculated with the previous fields.</string>
+    <string name="help_pointage_4">The remaining time is automatically calculated and updated with the current time and the arrival time</string>
+    <string name="help_pointage_5">Click on the current time to change it.</string>
+    <string name="help_weather_1">Enter here the city which you want to know the weather</string>
+    <string name="help_weather_2">Move this cursor to select the time of the weather forecast</string>
+    <string name="help_weather_3">Click on a day to get the weather forecast for this day</string>
+    <string name="help_web_1">Long click on a link to set it as your homepage (e.g. the current rally page).</string>
+</resources>

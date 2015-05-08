@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/vignette_bg"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <CheckBox
+        android:id="@+id/chkEnable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:text="" />
+
+    <ImageButton
+        android:id="@+id/smsContactButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="2dp"
+        android:src="@drawable/ic_sms" />
+
+    <ImageButton
+        android:id="@+id/callContactButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="2dp"
+        android:layout_toLeftOf="@id/smsContactButton"
+        android:src="@drawable/ic_call" />
+
+    <TextView
+        android:id="@+id/contactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/callContactButton"
+        android:layout_toRightOf="@id/chkEnable"
+        android:textSize="18sp" />
+
+</RelativeLayout>

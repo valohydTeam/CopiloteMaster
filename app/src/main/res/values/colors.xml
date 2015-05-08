@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffcc0000</color>
+    <!-- Dark Blue CopiloteMaster -->
+    <color name="dark_blue_copilotmaster">#264382</color>
+
+</resources>

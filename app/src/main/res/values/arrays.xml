@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quick_messages">
+        <item>@string/quick_message_ok</item>
+        <item>@string/quick_message_pb_voiture</item>
+        <item>@string/quick_message_sortie_route</item>
+        <item>@string/quick_message_crevaison</item>
+    </string-array>
+</resources>
