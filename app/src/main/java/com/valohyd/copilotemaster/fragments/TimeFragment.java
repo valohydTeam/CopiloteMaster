@@ -9,8 +9,12 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
@@ -22,11 +26,6 @@ import android.webkit.WebView.HitTestResult;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.valohyd.copilotemaster.R;
 
 /**
@@ -35,7 +34,7 @@ import com.valohyd.copilotemaster.R;
  * @author parodi
  * 
  */
-public class TimeFragment extends SherlockFragment {
+public class TimeFragment extends Fragment{
 
 	private View mainView;
 
@@ -217,7 +216,7 @@ public class TimeFragment extends SherlockFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.findItem(R.id.refresh_web);
 		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -227,7 +226,7 @@ public class TimeFragment extends SherlockFragment {
 		});
 		item = menu.findItem(R.id.help);
 		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

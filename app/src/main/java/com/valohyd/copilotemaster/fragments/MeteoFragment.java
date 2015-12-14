@@ -12,8 +12,12 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,15 +32,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.valohyd.copilotemaster.R;
 import com.valohyd.copilotemaster.utils.NetworkUtils;
 
-public class MeteoFragment extends SherlockFragment {
+public class MeteoFragment extends Fragment{
 
 	private View mainView;
 
@@ -209,7 +208,7 @@ public class MeteoFragment extends SherlockFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.findItem(R.id.refresh_web);
 		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -220,7 +219,7 @@ public class MeteoFragment extends SherlockFragment {
 
 		item = menu.findItem(R.id.help);
 		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

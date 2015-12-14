@@ -22,7 +22,16 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.WindowDecorActionBar;
+import android.support.v7.view.SupportMenuInflater;
+import android.support.v7.view.menu.MenuItemImpl;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -34,14 +43,6 @@ import android.widget.TimePicker.OnTimeChangedListener;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.valohyd.copilotemaster.fragments.ChronoFragment;
 import com.valohyd.copilotemaster.fragments.ContactFragment;
 import com.valohyd.copilotemaster.fragments.MeteoFragment;
@@ -54,7 +55,7 @@ import com.valohyd.copilotemaster.utils.MyDigitalClock;
 
 
 
-public class MainActivity extends SherlockFragmentActivity implements TabListener {
+public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
 
 	public static boolean mMapIsTouched = false;
 
@@ -452,12 +453,12 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	}
 
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
 	}
 
 	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
 		if (tab.getPosition() == 0) {
 			if (this.pointageFragment == null) {
@@ -523,7 +524,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 	}
 
 	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
 		if (tab.getPosition() == 0) {
 			ft.hide(this.pointageFragment);
 		}
@@ -607,12 +608,12 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.settings, menu);
 		if (mapFragment != null && mapFragment.isVisible()) {
 			MenuItem item = menu.findItem(R.id.help);
 			item.setVisible(true);
-			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

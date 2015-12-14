@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragment;
+
 import com.valohyd.copilotemaster.R;
 import com.valohyd.copilotemaster.utils.Chronometer;
 
@@ -25,7 +26,7 @@ import com.valohyd.copilotemaster.utils.Chronometer;
  * @author parodi
  * 
  */
-public class ChronoFragment extends SherlockFragment {
+public class ChronoFragment extends Fragment {
 
 	private View mainView;
 	private Button partielButton, startButton, stopButton; // Boutons chronos

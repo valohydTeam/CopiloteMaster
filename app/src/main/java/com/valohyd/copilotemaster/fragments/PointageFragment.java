@@ -17,8 +17,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,11 +32,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.valohyd.copilotemaster.MainActivity;
 import com.valohyd.copilotemaster.R;
 import com.valohyd.copilotemaster.service.PointageService;
@@ -43,7 +42,7 @@ import com.valohyd.copilotemaster.service.PointageService;
  * @author parodi
  * 
  */
-public class PointageFragment extends SherlockFragment {
+public class PointageFragment extends Fragment {
 
 	private View mainView;
 
@@ -263,7 +262,7 @@ public class PointageFragment extends SherlockFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.findItem(R.id.stop_pointage);
 		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -316,7 +315,7 @@ public class PointageFragment extends SherlockFragment {
 		});
 		item = menu.findItem(R.id.help);
 		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {

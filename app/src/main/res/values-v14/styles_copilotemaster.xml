@@ -20,7 +20,7 @@
 
 <resources>
 
-    <style name="Theme.Copilotemaster" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+    <style name="Theme.Copilotemaster" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_copilotemaster</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Copilotemaster</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Copilotemaster</item>
@@ -33,20 +33,20 @@
         <item name="android:actionBarWidgetTheme">@style/Theme.Copilotemaster.Widget</item>
     </style>
 
-    <style name="ActionBar.Solid.Copilotemaster" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
+    <style name="ActionBar.Solid.Copilotemaster" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/ab_solid_copilotemaster</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_copilotemaster</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_copilotemaster</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Copilotemaster</item>
     </style>
 
-    <style name="ActionBar.Transparent.Copilotemaster" parent="@style/Widget.Sherlock.ActionBar">
+    <style name="ActionBar.Transparent.Copilotemaster" parent="@android:style/Widget.DeviceDefault.ActionBar">
         <item name="android:background">@drawable/ab_transparent_copilotemaster</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Copilotemaster</item>
     </style>
 
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Copilotemaster.Widget" parent="@style/Theme.Sherlock">
+    <style name="Theme.Copilotemaster.Widget" parent="@android:style/Theme.DeviceDefault">
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Copilotemaster</item>
     </style>
 
