@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/button_bg_pressed" android:state_pressed="true"/>
-    <item android:drawable="@drawable/button_pressed_dither" android:state_focused="true"/>
-    <item android:drawable="@drawable/button_bg_disabled"  android:state_enabled="false"/>
-    <item android:drawable="@drawable/button_bg"/>
-
-</selector><!-- From: file:/C:/Users/valen_000/StudioProjects/CopiloteMaster/app/src/main/res/drawable/button_selector.xml -->

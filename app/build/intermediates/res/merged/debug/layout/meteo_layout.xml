@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/poweredGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/powered_by_google" />
+
+        <ImageButton
+            android:id="@+id/search_meteo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_selector"
+            android:src="@drawable/ic_menu_search" />
+
+        <EditText
+            android:id="@+id/search_text_meteo"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_height="35dp"
+            android:layout_toLeftOf="@id/search_meteo"
+            android:layout_toRightOf="@id/poweredGoogle"
+            android:background="@color/white"
+            android:hint="@string/hint_meteo"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences|textAutoCorrect" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ProgressBar
+            android:id="@+id/progressWeb"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+
+</LinearLayout>

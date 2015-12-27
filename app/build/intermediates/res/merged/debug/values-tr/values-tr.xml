@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Ana ekrana git"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Yukarı git"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Diğer seçenekler"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Tamamlandı"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Tümünü göster"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Bir uygulama seçin"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"KAPAT"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"AÇ"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Ara…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Sorguyu temizle"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Arama sorgusu"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Ara"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Sorguyu gönder"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Sesli arama"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Şununla paylaş"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"%s ile paylaş"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Daralt"</string>
+    <string name="accuracy">Sapma</string>
+    <string name="add_contact">Kişi Ekle</string>
+    <string name="app_name">Copilote Master</string>
+    <string name="aucun_contacts">Kayıtlı Kişi Yok !</string>
+    <string name="back_to_app">Uygulamayı geri almak için tıklayın</string>
+    <string name="change_home_title">AnaSayfayı değiştir</string>
+    <string name="choice_messages_dialog_title">Mesaj türü seçin</string>
+    <string name="chrono_title">Kronometre</string>
+    <string name="close">Kapat</string>
+    <string name="close_app">Çıkış</string>
+    <string msgid="2785372108150982144" name="common_google_play_services_api_unavailable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>, şu anda kullanılamayan bir veya daha fazla Google Play hizmetini gerektiriyor. Yardım için lütfen geliştiriciyle iletişim kurun."</string>
+    <string msgid="7334167077229901382" name="common_google_play_services_enable_button">"Google Play hizmetlerini etkinleştir"</string>
+    <string msgid="2016066508617425489" name="common_google_play_services_enable_text">"Google Play hizmetlerini etkinleştirmezseniz <ns1:g id="APP_NAME">%1$s</ns1:g> çalışmaz."</string>
+    <string msgid="4763733806837472840" name="common_google_play_services_enable_title">"Google Play hizmetlerini etkinleştirin"</string>
+    <string msgid="5765996826213593005" name="common_google_play_services_install_button">"Google Play hizmetlerini yükle"</string>
+    <string msgid="1545874412485515659" name="common_google_play_services_install_text_phone">"<ns1:g id="APP_NAME">%1$s</ns1:g>, şu anda telefonunuzda bulunmayan Google Play hizmetleri olmadan çalışmaz."</string>
+    <string msgid="2742131317258851812" name="common_google_play_services_install_text_tablet">"<ns1:g id="APP_NAME">%1$s</ns1:g>, şu anda tabletinizde bulunmayan Google Play hizmetleri olmadan çalışmaz."</string>
+    <string msgid="2110712637922504348" name="common_google_play_services_install_title">"Google Play hizmetlerini edinin"</string>
+    <string msgid="8004809446015217370" name="common_google_play_services_invalid_account_text">"Belirtilen hesap bu cihazda mevcut değil. Lütfen farklı bir hesap seçin."</string>
+    <string msgid="9894539456463288" name="common_google_play_services_invalid_account_title">"Geçersiz Hesap"</string>
+    <string msgid="2602915190038884860" name="common_google_play_services_network_error_text">"Google Play hizmetlerine bağlanmak için bir veri bağlantısı gerekiyor."</string>
+    <string msgid="5183831421651758225" name="common_google_play_services_network_error_title">"Ağ Hatası"</string>
+    <string msgid="3936796119014022295" name="common_google_play_services_notification_ticker">"Google Play hizmetleri hatası"</string>
+    <string msgid="6951442375899151085" name="common_google_play_services_restricted_profile_text">"Kısıtlı bir profilden hesaplara erişim desteklenmiyor."</string>
+    <string msgid="4958149393843193760" name="common_google_play_services_restricted_profile_title">"Kısıtlı Profil"</string>
+    <string msgid="59739986196915578" name="common_google_play_services_sign_in_failed_text">"Belirtilen hesapta oturum açılırken hata oluştu. Lütfen farklı bir hesap seçin."</string>
+    <string msgid="8431204498860131150" name="common_google_play_services_sign_in_failed_title">"Oturum açılamadı"</string>
+    <string msgid="7170719956698345984" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g>, Google Play hizmetleriyle ilgili sorun yaşıyor. Sorun devam ederse lütfen yardım için geliştiriciyle iletişim kurun."</string>
+    <string msgid="4291190028362992831" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>, cihazınız tarafından desteklenmeyen Google Play hizmetlerine ihtiyaç duyuyor. Yardım için üreticiyle iletişim kurun."</string>
+    <string msgid="909734065366822541" name="common_google_play_services_unsupported_title">"Google Play hizmetleri"</string>
+    <string msgid="2221302284291941971" name="common_google_play_services_update_button">"Güncelle"</string>
+    <string msgid="6230553430311881723" name="common_google_play_services_update_text">"Google Play hizmetlerini güncellemezseniz <ns1:g id="APP_NAME">%1$s</ns1:g> çalışmaz."</string>
+    <string msgid="2926201203597631481" name="common_google_play_services_update_title">"Google Play hizmetlerini güncelleyin"</string>
+    <string msgid="1576144479907495032" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>, şu anda güncellenmekte olan Google Play hizmetleri olmadan çalışmaz."</string>
+    <string msgid="1604540693139938838" name="common_google_play_services_updating_title">"Google Play hizmetleri güncelleniyor"</string>
+    <string msgid="8334920661858223093" name="common_google_play_services_wear_update_text">"Google Play hizmetlerinin yeni sürümü gerekiyor. Kendisini kısa süre içinde güncelleyecektir."</string>
+    <string msgid="311697239335516384" name="common_open_on_phone">"Telefonda aç"</string>
+    <string msgid="3156914698180786012" name="common_signin_button_text">"Oturum aç"</string>
+    <string msgid="1483290677806110088" name="common_signin_button_text_long">"Google\'da oturum aç"</string>
+    <string name="confirm_stop_pointage">Zaman Kontrol\' ü durdurmak istediğinize emin misiniz ?</string>
+    <string name="confirmation_envoi_sms">Bu numaralara konum gönder : </string>
+    <string name="contact">İletişim :</string>
+    <string name="contact_existant">Bu kişi zaten ekli !</string>
+    <string name="contact_mail">contact@valohyd.com</string>
+    <string name="contact_separator">\\n\\t</string>
+    <string name="contacts_title">Hızlı Aramalar</string>
+    <string name="delete_contacts">Seçileni sil</string>
+    <string name="developpers">Geliştiriciler : </string>
+    <string name="envoi_sms_title">Sms Gönder</string>
+    <string name="erase_poi">Bu noktayı sil</string>
+    <string name="erreur_suppression_contact">Hata, kişi silindi</string>
+    <string name="finish_hour">Varış Saatiniz</string>
+    <string name="first_help_pref">İlk kullanım bilgileri için burayı tıklayın</string>
+    <string name="first_help_pref_title">Kullanım klavuzu</string>
+    <string name="gps_off">GPS kapalı. Açmak ister misiniz ?</string>
+    <string name="gps_settings">Ayarlara git</string>
+    <string name="help_fifth_tab_content">Bu sekme, bulunduğunuz lokasyondaki ya da başka bir şehrin hava durumunu görmenizi sağlar.</string>
+    <string name="help_fifth_tab_name">Hava Durumu sekmesi</string>
+    <string name="help_first_tab_content">Bu sekme, bir sonraki zaman kontrol noktasına gidişiniz için gerekli zaman hesaplamalarını bulunmaktadır. Uygulamadan çıksanız bile telefonunuzun bildirim alanında kalan süreniz ve uyarılar çalışmaya devam edecektir</string>
+    <string name="help_first_tab_name">Zaman Kontrol sekmesi</string>
+    <string name="help_first_user_par1">Copilote Master\' e\nHoşgeldiniz !</string>
+    <string name="help_first_user_par1_1">Bu uygulama 6 sekme içermektedir :</string>
+    <string name="help_first_user_tab_chrono">Kronometre : Etap zamanlarınızı ve pist zamanlarınızı hesaplamanıza yarar</string>
+    <string name="help_first_user_tab_contacts">Hızlı Aramalar : Belirlediğiniz kişilere hızlı arama yapmanızı ve sms atmanızı sağlar</string>
+    <string name="help_first_user_tab_horaire">Zaman Kontrol : Noktalar arası zaman işlemlerinizi takip eder</string>
+    <string name="help_first_user_tab_meteo">Hava Durumu : Bulunduğunuz ya da başka bir yerin 7 günlük ve saat dilimlerine göre detaylı hava durumunu kontrol etmenizi sağlar</string>
+    <string name="help_first_user_tab_navigation">Harita : Geçerli konumunuzu, aracınızın anlık hızını ve radar bilgilerini Hızlı Arama kişileriniz ile paylaşmanızı sağlar</string>
+    <string name="help_first_user_tab_temps">Neticeler : TOSFED\' de bulunan resmi neticelere veya diğer netice sitelerine erişmenizi sağlar</string>
+    <string name="help_first_user_title">Uygulama nasıl kullanılır ?</string>
+    <string name="help_fourth_tab_content">Bu sekme, neticelerinizi kontrol etmeniz için TOSFED\' in neticeler sayfasına erişmenizi sağlar. Dilerseniz başka bir sayfa da ayarlayabilirsiniz.</string>
+    <string name="help_fourth_tab_name">Neticeler sekmesi</string>
+    <string name="help_map_1">Haritadaki konumuzu ortalamaya yarar</string>
+    <string name="help_map_2">Burada, anlık hızınızı görebilirsiniz. Bunun için GPS\' iniz açık olmalı</string>
+    <string name="help_map_3">Parmağınızı harita üzerine uzunca basılı tutarak (servis alanı, kapalı park, start, ...gibi) POI noktaları ekleyebilirsiniz</string>
+    <string name="help_map_4">Bu butona basarak, listenizdeki arkadaşlarınıza radar ve kamera noktalarını sms ile bildirebilirsiniz</string>
+    <string name="help_map_5">Bu butonu kullanarak, telefonunuzun GPS ayarlarını yapabilirsiniz</string>
+    <string name="help_pointage_1">Buraya, Kontrol Noktası zamanınızı girin</string>
+    <string name="help_pointage_2">Buraya, size verilen süreyi girin</string>
+    <string name="help_pointage_3">Varış Saatiniz otomatik hesaplanarak burada görüntülenecektir.</string>
+    <string name="help_pointage_4">Hesaplanan zaman için burada geri sayım başlayacaktır. Kalan zamanınızı hesaplamak ve görmek için işinizi kolaylaştırır</string>
+    <string name="help_pointage_5">Geçerli saat için senkron işlemini buradan yapabilirsiniz.</string>
+    <string name="help_second_tab_content">Bu sekme, haritalara erişerek geçerli konumunuzu bulmanızı ve anlık hızınızı öğrenmenizi sağlar. Dilerseniz haritaya İhtiyaç Noktası (POI) ekleyerek GPS yardımı ile bu noktalara (Google Map\'i kullanarak) erişebilirsiniz.</string>
+    <string name="help_second_tab_name">Harita sekmesi</string>
+    <string name="help_sixth_tab_content">Bu sekme, rehberinizden belirlediğiniz kişilere (SMS ya da arama ile) hızla erişmenizi sağlar</string>
+    <string name="help_sixth_tab_name">Hızlı Aramalar sekmesi</string>
+    <string name="help_third_tab_content">Bu sekme, klasik kronometre özelliğindedir. (Başlat, Durdur, Tur Zamanı, ...).</string>
+    <string name="help_third_tab_name">Kronometre sekmesi</string>
+    <string name="help_weather_1">Hava Durumunu öğrenmek istediğiniz şehri bu alana girin</string>
+    <string name="help_weather_2">İmleci hareket ettirerek saatlik hava tahminlerini görebilirsiniz</string>
+    <string name="help_weather_3">Hava durumunu öğrenmek istediğiniz güne tıklayarak, o güne ait hava tahminlerini görebilirsiniz</string>
+    <string name="help_web_1">Link üzerine uzunca basarak geçerli adresi değiştirebilirsiniz. (ör. Federasyonun netice sayfasının linkini girebilirsiniz).</string>
+    <string name="hint_meteo">Şehir</string>
+    <string name="homepage_settings">Neticeler sayfanızı buradan değiştirebilirsiniz</string>
+    <string name="homepage_titre_settings">AnaSayfayı değiştir</string>
+    <string name="horaire_title">Zaman Kontrol</string>
+    <string name="imparti_time">Verilen Süre</string>
+    <string name="late_pointage_title">ZK\' ya geciktiniz !</string>
+    <string name="menu_about">Hakkında</string>
+    <string name="menu_help">Yardım</string>
+    <string name="menu_refresh_web">Yenile</string>
+    <string name="menu_settings">Ayarlar</string>
+    <string name="menu_stop_pointage">Zamanı Sıfırla</string>
+    <string name="message_google_maps_introuvable">Google Haritalar uygulaması cihazınızda kurulu değil ! Haritaları etkin kullanabilmek için Google Play Store\' dan uygulamayı indirin.</string>
+    <string name="message_homepage">AnaSayfa ayarını bu linkle değiştirmek istediğinize emin misiniz ? :</string>
+    <string name="message_sms">Şuan ki konumum !</string>
+    <string name="meteo_title">Hava Durumu</string>
+    <string msgid="8327680881775995150" name="mr_media_route_button_content_description">"Yayınla"</string>
+    <string msgid="7553005460920830010" name="mr_media_route_chooser_searching">"Cihaz arayın…"</string>
+    <string msgid="7106830097177242655" name="mr_media_route_chooser_title">"Cihaza bağlanın"</string>
+    <string msgid="109793632378378069" name="mr_media_route_controller_disconnect">"Bağlantıyı kes"</string>
+    <string msgid="3641544772007543920" name="mr_media_route_controller_no_info_available">"Bilgi yok"</string>
+    <string msgid="8315773974194466049" name="mr_media_route_controller_pause">"Duraklat"</string>
+    <string msgid="5214423499524760404" name="mr_media_route_controller_play">"Oynat"</string>
+    <string msgid="379358765881274425" name="mr_media_route_controller_settings_description">"Rota ayarları"</string>
+    <string msgid="5398645111664294430" name="mr_media_route_controller_stop">"Yayını durdur"</string>
+    <string msgid="5441529851481176817" name="mr_system_route_name">"Sistem"</string>
+    <string msgid="7498112907524977311" name="mr_user_route_category_name">"Cihazlar"</string>
+    <string name="navigate_to">Bu noktaya git</string>
+    <string name="navigation_title">Harita</string>
+    <string name="next">Sonraki</string>
+    <string name="no_contacts">Kayıtlı Kişi Yok !</string>
+    <string name="notifications">Uyarılar</string>
+    <string name="part_time">Tur Zamanı Al</string>
+    <string msgid="2132213647576279742" name="place_autocomplete_clear_button">"Aramayı temizle"</string>
+    <string msgid="4600782048316473865" name="place_autocomplete_search_hint">"Ara"</string>
+    <string name="poi_arrivee_es">Ö.E. Finish</string>
+    <string name="poi_depart_es">Ö.E. Start</string>
+    <string name="poi_divers">Diğer</string>
+    <string name="poi_parc_assistance">Servis Alanı</string>
+    <string name="poi_parc_ferme">Kapalı Park</string>
+    <string name="poi_title">POI tipini seçin</string>
+    <string name="pointage_time">Kontrol Noktası Saati</string>
+    <string name="pointage_title_notif">Zaman Kontrol</string>
+    <string name="previous">Önceki</string>
+    <string name="quick_message_crevaison">SS Delinme</string>
+    <string name="quick_message_ok">SS olur</string>
+    <string name="quick_message_pb_voiture">Araç ile yanlış bir şey, onarım gerekir</string>
+    <string name="quick_message_sortie_route">SS yoldan</string>
+    <string name="quick_messages_dialog_title">Hızlı Mesaj</string>
+    <string name="quit_message">Çıkmak için tekrar basın</string>
+    <string name="remaining_time">Kalan Süre</string>
+    <string name="reset_chrono">Sıfırla</string>
+    <string name="resume_chrono">Devam Et</string>
+    <string name="send_to">SMS Gönderildi</string>
+    <string name="set_hour">Saati Ayarla</string>
+    <string name="set_imparti_time">Verilen Süreyi Gir</string>
+    <string name="settings_notifs">Kontrol Noktası uyarılarını Aç/Kapat</string>
+    <string name="share_radar">Konumumu Bildir !</string>
+    <string name="sms_error">SMS Gönerdilemedi !</string>
+    <string name="start_chrono">Başlat</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="stop_chrono">Durdur</string>
+    <string name="stop_pointage">Zaman Kontrolünü Durdur</string>
+    <string name="thanksTo">Katkıda Bulunanlar : </string>
+    <string name="times_title">Neticeler</string>
+    <string name="titre_choix_contact">Kişi Seçin</string>
+    <string name="unit_kmh">km/sa</string>
+    <string name="unknown">Belirsiz</string>
+    <string name="url_ffsa">http://www.tosfed.org.tr/</string>
+    <string msgid="4184147110658930238" name="wallet_buy_button_place_holder">"Google ile satın al"</string>
+</resources>

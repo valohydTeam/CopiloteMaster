@@ -20,62 +20,11 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.Copilotemaster" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
+    <style name="Theme.Copilotemaster" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarItemBackground">@drawable/selectable_background_copilotemaster</item>
-        <item name="dropDownListViewStyle">@style/DropDownListView.Copilotemaster</item>
-        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Copilotemaster</item>
-        <item name="actionDropDownStyle">@style/DropDownNav.Copilotemaster</item>
-        <item name="actionBarStyle">@style/ActionBar.Solid.Copilotemaster</item>
         <item name="actionModeBackground">@drawable/cab_background_top_copilotemaster</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_copilotemaster</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Copilotemaster</item>
         <!-- Light.DarkActionBar specific -->
-        <item name="actionBarWidgetTheme">@style/Theme.Copilotemaster.Widget</item>
-    </style>
-
-    <style name="ActionBar.Solid.Copilotemaster" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid.Inverse">
-        <item name="background">@drawable/ab_solid_copilotemaster</item>
-        <item name="backgroundStacked">@drawable/ab_stacked_solid_copilotemaster</item>
-        <item name="backgroundSplit">@drawable/ab_bottom_solid_copilotemaster</item>
-        <item name="progressBarStyle">@style/ProgressBar.Copilotemaster</item>
-    </style>
-
-    <style name="ActionBar.Transparent.Copilotemaster" parent="@android:style/Widget.DeviceDefault.ActionBar">
-        <item name="background">@drawable/ab_transparent_copilotemaster</item>
-        <item name="progressBarStyle">@style/ProgressBar.Copilotemaster</item>
-    </style>
-
-    <style name="DropDownListView.Copilotemaster" parent="@android:style/Widget.DeviceDefault.ListView.DropDown">
-        <item name="android:listSelector">@drawable/selectable_background_copilotemaster</item>
-        <item name="android:padding">1dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="ActionBarTabStyle.Copilotemaster" parent="@android:style/Widget.DeviceDefault.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator_ab_copilotemaster</item>
-        <item name="android:padding">1dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="DropDownNav.Copilotemaster" parent="@android:style/Widget.DeviceDefault.Spinner">
-        <item name="android:background">@drawable/spinner_background_ab_copilotemaster</item>
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_copilotemaster</item>
-        <item name="android:dropDownSelector">@drawable/selectable_background_copilotemaster</item>
-        <item name="android:padding">1dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="ProgressBar.Copilotemaster" parent="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/progress_horizontal_copilotemaster</item>
-    </style>
-
-    <style name="ActionButton.CloseMode.Copilotemaster" parent="@android:style/Widget.DeviceDefault.ActionButton.CloseMode">
-        <item name="android:background">@drawable/btn_cab_done_copilotemaster</item>
-    </style>
-
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Copilotemaster.Widget" parent="@android:style/Theme.DeviceDefault">
-        <item name="dropDownListViewStyle">@style/DropDownListView.Copilotemaster</item>
     </style>
 
 </resources>
