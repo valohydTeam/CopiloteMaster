@@ -35,10 +35,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.valohyd.copilotemaster.R;
-import com.valohyd.copilotemaster.adapters.MeteoListAdapter;
+import com.valohyd.copilotemaster.models.WeatherCity;
+import com.valohyd.copilotemaster.utils.JSONParser;
 import com.valohyd.copilotemaster.utils.NetworkUtils;
 
+import org.json.JSONObject;
+
 public class MeteoFragment extends Fragment{
+
+	private static final String API_KEY = "34b48b18d65467d70d068c7471e9ea42";
+
+	private static final String API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&lang=fr";
 
 	private View mainView;
 
@@ -165,7 +172,7 @@ public class MeteoFragment extends Fragment{
 	private void performSearch() {
 		if (searchText.getText().length() != 0) {
 			if (ids_blocks == null)
-				new LoadWeatherAsynctask().execute();
+				new LoadWeatherAsynctask().execute(searchText.getText().toString());
 			else
 				web.loadUrl(home_url + "+" + searchText.getText().toString());
 		}
@@ -252,10 +259,10 @@ public class MeteoFragment extends Fragment{
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1;
 	}
 
-	private class LoadWeatherAsynctask extends AsyncTask<Void, Void, Void> {
+	private class LoadWeatherAsynctask extends AsyncTask<String, Void, Void> {
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected Void doInBackground(String... params) {
 			try {
 				URL ids_url = new URL(URL_IDS);
 				Scanner s = new Scanner(ids_url.openStream());
@@ -264,6 +271,16 @@ public class MeteoFragment extends Fragment{
 							.nextLine().split(";")));
 				}
 				s.close();
+
+				//TEST
+				if(params.length>0) {
+					JSONParser parser = new JSONParser();
+					JSONObject json = parser.getJSONFromUrl(API_BASE_URL + "&q=" + params[0] + "&appid=" + API_KEY);
+					WeatherCity weatherCity = new WeatherCity(json);
+					System.out.println(weatherCity.toString());
+				}
+
+
 			} catch (IOException ex) {
 				// there was some connection problem, or the file did not exist
 				ex.printStackTrace(); // for now, simply output it.
