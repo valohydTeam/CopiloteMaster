@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,11 +29,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.valohyd.copilotemaster.R;
+import com.valohyd.copilotemaster.adapters.MeteoListAdapter;
 import com.valohyd.copilotemaster.utils.NetworkUtils;
 
 public class MeteoFragment extends Fragment{
@@ -51,11 +54,15 @@ public class MeteoFragment extends Fragment{
 
 	private ImageButton searchButton; // Bouton de recherche
 
+	private ListView mListViewVilles; // listview de la météo de chaque ville
+
 	private String home_url = "http://www.google.fr/search?q=Meteo";
 
 	private static final String URL_IDS = "http://www.valohyd.com/copilotemaster/weather_ids.txt";
 
 	private ArrayList<String> ids_blocks; // ID des Block a cacher
+
+	public MeteoFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +104,13 @@ public class MeteoFragment extends Fragment{
 				}
 			}
 		});
+
+		// récupérer la listview des méteo
+		mListViewVilles = (ListView) mainView.findViewById(R.id.listview_meteo);
+		if(mListViewVilles != null){
+			MeteoListAdapter adapter = new MeteoListAdapter(getActivity(), new String[] {"Blop", "Antibes", "Fréjus)"});
+			mListViewVilles.setAdapter(adapter);
+		}
 
 		// récupérer la web view
 		web = (WebView) mainView.findViewById(R.id.webView);

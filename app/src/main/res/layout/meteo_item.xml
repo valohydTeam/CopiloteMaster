@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    card_view:contentPadding="8dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardBackgroundColor="@android:color/white"
+    android:layout_margin="7dp"
+    card_view:cardElevation="5dp"
+    card_view:cardCornerRadius="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textview_ville"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Antibes"/>
+
+    <TextView
+        android:id="@+id/textview_detail_meteo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_ville"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:text="LUN 13H Ensoleillé"/>
+
+    <LinearLayout
+        android:id="@+id/layout_slider_meteo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_detail_meteo"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="70dp"
+        android:orientation="vertical">
+        <SeekBar
+            android:id="@+id/seekbar_meteo_heure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:thumb="@android:drawable/ic_menu_edit"
+            android:max="8"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="8">
+            <TextView
+                android:id="@+id/textview_meteo_heure_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/textview_meteo_heure_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0h"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/image_meteo_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <TextView
+            android:id="@+id/textview_meteo_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:text="20°"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout_slider_meteo"
+        android:layout_marginTop="15dp"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageview_meteo_j1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/btn_star_big_on"/>
+
+            <TextView
+                android:id="@+id/tewtview_meteo_j1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lun"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageview_meteo_j2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/btn_star_big_on"/>
+
+            <TextView
+                android:id="@+id/tewtview_meteo_j2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mar"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageview_meteo_j3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/btn_star_big_on"/>
+
+            <TextView
+                android:id="@+id/tewtview_meteo_j3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mer"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageview_meteo_j4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/btn_star_big_on"/>
+
+            <TextView
+                android:id="@+id/tewtview_meteo_j4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jeu"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageview_meteo_j5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/btn_star_big_on"/>
+
+            <TextView
+                android:id="@+id/tewtview_meteo_j5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ven"/>
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
