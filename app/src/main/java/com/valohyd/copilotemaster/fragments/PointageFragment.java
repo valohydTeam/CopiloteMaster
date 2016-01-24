@@ -223,6 +223,7 @@ public class PointageFragment extends Fragment {
 																			// temps
 																			// restant
 							savePreferences(); // On sauvegarde
+							getActivity().invalidateOptionsMenu(); //on reconstruit les boutons de l'action bar pour le bouton de pointage
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
@@ -255,13 +256,18 @@ public class PointageFragment extends Fragment {
 	public void setService(PointageService service,
 			ServiceConnection mConnection) {
 		this.servicePointage = service;
+		//HACK
+		loadPreferences();
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.findItem(R.id.stop_pointage);
-		item.setVisible(true);
+		String imparti = sharedPrefs.getString(TAG_PREF_IMPARTI,
+				getActivity().getString(R.string.unknown));
+		boolean hasPointage = !imparti.equals(getString(R.string.unknown));
+		item.setVisible(hasPointage);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
 			@Override
@@ -306,6 +312,7 @@ public class PointageFragment extends Fragment {
 								signRemainingTime.setTextColor(getResources()
 										.getColor(R.color.black));
 								savePreferences();
+								getActivity().invalidateOptionsMenu();
 							}
 						});
 				builder.setNegativeButton(android.R.string.no, null);
@@ -474,7 +481,7 @@ public class PointageFragment extends Fragment {
 		pointageTime.setText(pointage);
 		impartiTime.setText(imparti);
 
-		if (!pointage.equals(R.string.unknown)) {
+		if (!pointage.equals(getString(R.string.unknown))) {
 			try {
 				pointageDate = new SimpleDateFormat("HH:mm").parse(pointage);
 				Date d = new Date();
@@ -488,7 +495,7 @@ public class PointageFragment extends Fragment {
 			}
 		}
 
-		if (!imparti.equals(R.string.unknown)) {
+		if (!imparti.equals(getString(R.string.unknown))) {
 			try {
 				impartiDate = new SimpleDateFormat("HH:mm").parse(imparti);
 				setRemainingTime(MainActivity.getRallyeDate());
@@ -496,6 +503,13 @@ public class PointageFragment extends Fragment {
 				e.printStackTrace();
 			}
 		}
+		else{
+			if(servicePointage!=null) {
+				servicePointage.stopTout();
+			}
+		}
+
+		getActivity().invalidateOptionsMenu();
 	}
 
 	/**

@@ -9,5 +9,7 @@
     <color name="holo_red_light">#ffcc0000</color>
     <!-- Dark Blue CopiloteMaster -->
     <color name="dark_blue_copilotmaster">#264382</color>
+    <!-- Darker Dark Blue CopiloteMaster -->
+    <color name="darker_dark_blue_copilotmaster">#1b305e</color>
 
 </resources>

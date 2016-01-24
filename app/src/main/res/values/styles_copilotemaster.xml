@@ -18,13 +18,21 @@
      limitations under the License.
 -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.Copilotemaster" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarItemBackground">@drawable/selectable_background_copilotemaster</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="actionModeBackground">@drawable/cab_background_top_copilotemaster</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_copilotemaster</item>
+        <item name="colorPrimary">@color/dark_blue_copilotmaster</item>
+        <item name="colorPrimaryDark">@color/darker_dark_blue_copilotmaster</item>
         <!-- Light.DarkActionBar specific -->
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background"  tools:ignore="NewApi">@color/dark_blue_copilotmaster</item>
+        <item name="background">@color/dark_blue_copilotmaster</item>
     </style>
 
 </resources>

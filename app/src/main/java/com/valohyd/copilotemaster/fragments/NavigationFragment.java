@@ -1,5 +1,6 @@
 package com.valohyd.copilotemaster.fragments;
 
+import java.security.Permission;
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
@@ -10,12 +11,14 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.InflateException;
@@ -36,6 +39,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationChangeListener;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,6 +48,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.maps.GeoPoint;
 import com.valohyd.copilotemaster.MainActivity;
+import com.valohyd.copilotemaster.Manifest;
 import com.valohyd.copilotemaster.R;
 import com.valohyd.copilotemaster.models.Contact;
 import com.valohyd.copilotemaster.models.POI;
@@ -59,64 +65,50 @@ import com.valohyd.copilotemaster.utils.MySupportMapFragment;
 public class NavigationFragment extends MySupportMapFragment implements
 		OnMyLocationChangeListener {
 
-	private static final String SEPARATEUR = "\n\t";
 	// CONSTANTES VITESSE
 	public static final int INDEX_KM = 0;
 	public static final int INDEX_MILES = 0;
 	public static final int DEFAULT_SPEED_LIMIT = 80; // TODO ?
 	public static final int HOUR_MULTIPLIER = 3600;
 	public static final double UNIT_MULTIPLIERS[] = { 0.001, 0.000621371192 };
-
 	// GPS
 	protected static final long GPS_UPDATE_TIME_INTERVAL = 3000; // millis
 	protected static final float GPS_UPDATE_DISTANCE_INTERVAL = 0; // meters
-	private LocationManager mlocManager;
-	private MyGPSListener mGpsListener;
-
-	private boolean firstFix = true, firstTime = true;
-
+	private static final String SEPARATEUR = "\n\t";
 	// BDD
 	ContactsBDD bdd;
 	PoisBDD pois_bdd;
-
-	// TAGS
-
 	LinearLayout layoutButtons; // Layout par dessus la map
-
 	ImageButton radarButton, gpsButton; // Bouton de radar
-
 	AlertDialog.Builder contact_dialog; // Dialog de contact
 
-	private ArrayList<String> contacts, selected_contacts; // Contacts et
-															// contacts
-															// selectionnés
-
-	private ArrayList<POI> list_pois; // Liste des POIs
-
+	// TAGS
 	String[] poi_types;// Types
-	// des
-	// POI
-
 	int[] poi_icons = { R.drawable.parc_ferme_icon, R.drawable.assistance_icon,
 			R.drawable.start_icon, R.drawable.end_icon, R.drawable.poi_icon }; // Icones
-																				// des
-																				// POI
-
-	/**
-	 * La carte
-	 */
-	private GoogleMap map;
-
-	/**
-	 * Le container
-	 */
-	private View mainView;
-
 	/**
 	 * Ma position
 	 */
 	GeoPoint myLocation;
-
+	private LocationManager mlocManager;
+															// contacts
+															// selectionnés
+	private MyGPSListener mGpsListener;
+	private boolean firstFix = true, firstTime = true;
+	// des
+	// POI
+	private ArrayList<String> contacts, selected_contacts; // Contacts et
+																				// des
+																				// POI
+	private ArrayList<POI> list_pois; // Liste des POIs
+	/**
+	 * La carte
+	 */
+	private GoogleMap map;
+	/**
+	 * Le container
+	 */
+	private View mainView;
 	private TextView speedText, accuracyText; // Texte Vitesse et précision
 	private double speed, accuracy; // vitesse,precision
 
@@ -281,101 +273,108 @@ public class NavigationFragment extends MySupportMapFragment implements
 			setHasOptionsMenu(true);
 
 			// MAP
-			map = ((SupportMapFragment) ((MainActivity) getActivity())
-					.getSupportFragmentManager().findFragmentById(R.id.map))
-					.getMap();
-			if (map != null) {
-				// GEOLOCALISATION API V2
-				map.setMyLocationEnabled(true);
-				map.setOnMyLocationChangeListener(this);
-				map.setTrafficEnabled(true);
-				// Ajout d'un POI au longClick
-				map.setOnMapLongClickListener(new OnMapLongClickListener() {
+			((MapFragment)((MainActivity) getActivity())
+					.getFragmentManager().findFragmentById(R.id.map))
+					.getMapAsync(new OnMapReadyCallback() {
+						@Override
+						public void onMapReady(GoogleMap googleMap) {
+                            if(googleMap!=null && ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.MAPS_RECEIVE)== PackageManager.PERMISSION_GRANTED) {
+								map = googleMap;
+								map.setMyLocationEnabled(true);
+								map.setOnMyLocationChangeListener(NavigationFragment.this);
+								map.setTrafficEnabled(true);
+								// Ajout d'un POI au longClick
+								map.setOnMapLongClickListener(new OnMapLongClickListener() {
 
-					@Override
-					public void onMapLongClick(final LatLng position) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(
-								getActivity());
-						builder.setTitle(R.string.poi_title);
-						builder.setItems(poi_types, new OnClickListener() {
+									@Override
+									public void onMapLongClick(final LatLng position) {
+										AlertDialog.Builder builder = new AlertDialog.Builder(
+												getActivity());
+										builder.setTitle(R.string.poi_title);
+										builder.setItems(poi_types, new OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// Construction du POI
-								map.addMarker(new MarkerOptions()
-										.position(position)
-										.title(poi_types[which])
-										.icon(BitmapDescriptorFactory
-												.fromResource(poi_icons[which])));
-								POI p = new POI(which, position);
-								savePOI(p);
+											@Override
+											public void onClick(DialogInterface dialog,
+																int which) {
+												// Construction du POI
+												map.addMarker(new MarkerOptions()
+														.position(position)
+														.title(poi_types[which])
+														.icon(BitmapDescriptorFactory
+																.fromResource(poi_icons[which])));
+												POI p = new POI(which, position);
+												savePOI(p);
+											}
+
+										});
+										builder.show();
+										builder.setCancelable(true);
+										builder.setNeutralButton(android.R.string.cancel, null);
+
+									}
+								});
+								// Action au clic sur le POI
+								map.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+									@Override
+									public boolean onMarkerClick(final Marker marker) {
+										AlertDialog.Builder builder = new AlertDialog.Builder(
+												getActivity());
+										builder.setTitle(marker.getTitle());
+										builder.setCancelable(true);
+										builder.setNeutralButton(android.R.string.cancel, null);
+										builder.setNegativeButton(R.string.erase_poi,
+												new OnClickListener() {
+
+													@Override
+													public void onClick(DialogInterface dialog,
+																		int which) {
+														deletePOI(marker);
+													}
+												});
+										builder.setPositiveButton(R.string.navigate_to,
+												new OnClickListener() {
+
+													@Override
+													public void onClick(DialogInterface dialog,
+																		int which) {
+														try {
+															Intent intent = new Intent(
+																	android.content.Intent.ACTION_VIEW,
+																	Uri.parse("google.navigation:q="
+																			+ marker.getPosition().latitude
+																			+ ","
+																			+ marker.getPosition().longitude));
+															startActivity(intent);
+														} catch (Exception e) {
+															AlertDialog.Builder d = new AlertDialog.Builder(
+																	getActivity());
+															d.setMessage(R.string.message_google_maps_introuvable);
+															d.setPositiveButton(
+																	getString(R.string.close),
+																	null);
+															d.show();
+														}
+													}
+												});
+										builder.show();
+
+										return false;
+									}
+								});
+
+								// Initialisation des POIS
+								initPOIs();
 							}
+						}
+					});
 
-						});
-						builder.show();
-						builder.setCancelable(true);
-						builder.setNeutralButton(android.R.string.cancel, null);
 
-					}
-				});
-				// Action au clic sur le POI
-				map.setOnMarkerClickListener(new OnMarkerClickListener() {
+					} catch (InflateException e)
 
-					@Override
-					public boolean onMarkerClick(final Marker marker) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(
-								getActivity());
-						builder.setTitle(marker.getTitle());
-						builder.setCancelable(true);
-						builder.setNeutralButton(android.R.string.cancel, null);
-						builder.setNegativeButton(R.string.erase_poi,
-								new OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										deletePOI(marker);
-									}
-								});
-						builder.setPositiveButton(R.string.navigate_to,
-								new OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										try {
-											Intent intent = new Intent(
-													android.content.Intent.ACTION_VIEW,
-													Uri.parse("google.navigation:q="
-															+ marker.getPosition().latitude
-															+ ","
-															+ marker.getPosition().longitude));
-											startActivity(intent);
-										} catch (Exception e) {
-											AlertDialog.Builder d = new AlertDialog.Builder(
-													getActivity());
-											d.setMessage(R.string.message_google_maps_introuvable);
-											d.setPositiveButton(
-													getString(R.string.close),
-													null);
-											d.show();
-										}
-									}
-								});
-						builder.show();
-
-						return false;
-					}
-				});
-
-				// Initialisation des POIS
-				initPOIs();
+			{
+				((MainActivity) getActivity()).reloadMap();
 			}
-		} catch (InflateException e) {
-			((MainActivity) getActivity()).reloadMap();
-		}
-
 		// récupérer la map
 		return mainView;
 	}
@@ -506,6 +505,25 @@ public class NavigationFragment extends MySupportMapFragment implements
 		return ((speed * HOUR_MULTIPLIER) * UNIT_MULTIPLIERS[INDEX_KM]);
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		MenuItem item = menu.findItem(R.id.help);
+		item.setVisible(true);
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Dialog help_dialog = new Dialog(getActivity(),
+						android.R.style.Theme_Translucent_NoTitleBar);
+				help_dialog.setTitle(getString(R.string.menu_help));
+				help_dialog.setContentView(R.layout.help_navigation_layout);
+				help_dialog.show();
+				return false;
+			}
+		});
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
 	private class MyGPSListener implements GpsStatus.Listener {
 		public void onGpsStatusChanged(int event) {
 			if (gpsButton != null && getActivity() != null
@@ -527,25 +545,6 @@ public class NavigationFragment extends MySupportMapFragment implements
 				}
 			}
 		}
-	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		MenuItem item = menu.findItem(R.id.help);
-		item.setVisible(true);
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				Dialog help_dialog = new Dialog(getActivity(),
-						android.R.style.Theme_Translucent_NoTitleBar);
-				help_dialog.setTitle(getString(R.string.menu_help));
-				help_dialog.setContentView(R.layout.help_navigation_layout);
-				help_dialog.show();
-				return false;
-			}
-		});
-		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 }
