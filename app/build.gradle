@@ -8,6 +8,7 @@ android {
         applicationId "com.valohyd.copilotemaster"
         minSdkVersion 14
         targetSdkVersion 23
+        /*generatedDensities = ['ldpi', 'mdpi', 'hdpi', 'xhdpi', 'xxdhpi']*/
     }
 
     buildTypes {

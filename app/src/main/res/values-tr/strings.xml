@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="country_code">tr</string>
 
     <!-- Titre app -->
     <string name="app_name">Copilote Master</string>

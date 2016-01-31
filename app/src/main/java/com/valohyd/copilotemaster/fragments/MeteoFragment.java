@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.valohyd.copilotemaster.R;
+import com.valohyd.copilotemaster.adapters.MeteoListAdapter;
 import com.valohyd.copilotemaster.models.WeatherCity;
 import com.valohyd.copilotemaster.utils.JSONParser;
 import com.valohyd.copilotemaster.utils.NetworkUtils;
@@ -45,25 +46,19 @@ public class MeteoFragment extends Fragment{
 
 	private static final String API_KEY = "34b48b18d65467d70d068c7471e9ea42";
 
-	private static final String API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&lang=fr";
+	private static final String API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric";
 
 	private View mainView;
 
-	private WebView web; // WebView
-
 	private Bundle etatSauvegarde; // Sauvegarde de la vue
-
-	private boolean dejaCharge = false; // Etat de la page
-
-	private ProgressBar progress; // ProgressBar
 
 	private EditText searchText; // Champs de recherche
 
 	private ImageButton searchButton; // Bouton de recherche
 
-	private ListView mListViewVilles; // listview de la météo de chaque ville
+	private ListView mListViewVilles; // listview de la mÃ©tÃ©o de chaque ville
 
-	private String home_url = "http://www.google.fr/search?q=Meteo";
+	//private String home_url = "http://www.google.fr/search?q=Meteo";
 
 	private static final String URL_IDS = "http://www.valohyd.com/copilotemaster/weather_ids.txt";
 
@@ -73,19 +68,17 @@ public class MeteoFragment extends Fragment{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
 		mainView = inflater.inflate(R.layout.meteo_layout, container, false);
-
-		progress = (ProgressBar) mainView.findViewById(R.id.progressWeb);
 
 		searchText = (EditText) mainView.findViewById(R.id.search_text_meteo);
 		searchText
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
 					public boolean onEditorAction(TextView v, int actionId,
-							KeyEvent event) {
+												  KeyEvent event) {
 						if (actionId == EditorInfo.IME_ACTION_DONE) {
 							if(NetworkUtils.networkConnectionAvailable(getActivity())){
 								performSearch();
@@ -112,38 +105,11 @@ public class MeteoFragment extends Fragment{
 			}
 		});
 
-		// récupérer la listview des méteo
+		// rÃ©cupÃ©rer la listview des mÃ©teo
 		mListViewVilles = (ListView) mainView.findViewById(R.id.listview_meteo);
 		if(mListViewVilles != null){
-			MeteoListAdapter adapter = new MeteoListAdapter(getActivity(), new String[] {"Blop", "Antibes", "Fréjus)"});
-			mListViewVilles.setAdapter(adapter);
-		}
-
-		// récupérer la web view
-		web = (WebView) mainView.findViewById(R.id.webView);
-
-		if (web != null) {
-			if (!dejaCharge) {
-				progress.setVisibility(View.GONE);
-				web.setVisibility(View.INVISIBLE);
-			} else if (etatSauvegarde != null) {
-				web.restoreState(etatSauvegarde);
-			}
-
-			// paramétrer la page
-			web.getSettings().setBuiltInZoomControls(false);
-			web.getSettings().setSupportZoom(false);
-			web.getSettings().setGeolocationEnabled(true);
-			web.getSettings().setUseWideViewPort(true);
-			web.getSettings().setJavaScriptEnabled(true);
-			web.setVerticalScrollBarEnabled(false);
-			web.setHorizontalScrollBarEnabled(false);
-
-			// autoriser la navigation dans les pages
-			web.setWebViewClient(new MyWebViewClient());
-			web.setWebChromeClient(new MyWebChromeClient());
-
-			dejaCharge = true;
+			//MeteoListAdapter adapter = new MeteoListAdapter(getActivity(), new String[] {"Blop", "Antibes", "FrÃ©jus)"});
+			//mListViewVilles.setAdapter(adapter);
 		}
 
 		// POUR L'ICONE DU MENU !
@@ -154,7 +120,6 @@ public class MeteoFragment extends Fragment{
 	@Override
 	public void onPause() {
 		etatSauvegarde = new Bundle();
-		web.saveState(etatSauvegarde);
 
 		super.onPause();
 	}
@@ -170,59 +135,15 @@ public class MeteoFragment extends Fragment{
 
 	// Recherche
 	private void performSearch() {
-		if (searchText.getText().length() != 0) {
-			if (ids_blocks == null)
-				new LoadWeatherAsynctask().execute(searchText.getText().toString());
-			else
-				web.loadUrl(home_url + "+" + searchText.getText().toString());
+		if ( (searchText.getText().length() != 0) ){
+            new LoadWeatherAsynctask().execute(searchText.getText().toString());
 		}
 		// close keyboard
 		((InputMethodManager) getActivity().getSystemService(
 				Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
 				searchText.getWindowToken(), 0);
-
 	}
 
-	private class MyWebViewClient extends WebViewClient {
-
-		@Override
-		public void onPageFinished(WebView view, String url) {
-			super.onPageFinished(view, url);
-			for (String id : ids_blocks) {
-				web.loadUrl("javascript:(function() { "
-						+ "document.getElementById('" + id
-						+ "').style.display = 'none'; " + "})()");
-			}
-			web.loadUrl("javascript:(function() { "
-					+ "var elements = document.getElementsByClassName('rc');"
-					+ "for (i=0; i<elements.length; i++){"
-					+ "elements[i].style.display = 'none'" + "}" + "})()");
-			progress.setVisibility(View.GONE);
-			web.setVisibility(View.VISIBLE);
-
-		}
-
-		@Override
-		public void onPageStarted(WebView view, String url, Bitmap favicon) {
-			super.onPageStarted(view, url, favicon);
-			progress.setVisibility(View.VISIBLE);
-			web.setVisibility(View.GONE);
-		}
-
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			return super.shouldOverrideUrlLoading(view, url);
-		}
-
-	}
-
-	private class MyWebChromeClient extends WebChromeClient {
-		@Override
-		public void onProgressChanged(WebView view, int newProgress) {
-			progress.setProgress(newProgress);
-			super.onProgressChanged(view, newProgress);
-		}
-	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -233,7 +154,7 @@ public class MeteoFragment extends Fragment{
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				web.reload();
+				// todo web.reload();
 				return false;
 			}
 		});
@@ -260,28 +181,20 @@ public class MeteoFragment extends Fragment{
 	}
 
 	private class LoadWeatherAsynctask extends AsyncTask<String, Void, Void> {
-
+	private MeteoListAdapter adapter;
 		@Override
 		protected Void doInBackground(String... params) {
 			try {
-				URL ids_url = new URL(URL_IDS);
-				Scanner s = new Scanner(ids_url.openStream());
-				while (s.hasNextLine()) {
-					ids_blocks = new ArrayList<String>(Arrays.asList(s
-							.nextLine().split(";")));
-				}
-				s.close();
-
 				//TEST
 				if(params.length>0) {
 					JSONParser parser = new JSONParser();
-					JSONObject json = parser.getJSONFromUrl(API_BASE_URL + "&q=" + params[0] + "&appid=" + API_KEY);
+					JSONObject json = parser.getJSONFromUrl(API_BASE_URL + "&q=" + params[0].trim() + "&appid=" + API_KEY + "&lang=" + getString(R.string.country_code));
 					WeatherCity weatherCity = new WeatherCity(json);
 					System.out.println(weatherCity.toString());
+					// créer l'adapter avec les villes
+					adapter = new MeteoListAdapter(getActivity(), new WeatherCity[] {weatherCity});
 				}
-
-
-			} catch (IOException ex) {
+			} catch (Exception ex) {
 				// there was some connection problem, or the file did not exist
 				ex.printStackTrace(); // for now, simply output it.
 			}
@@ -291,7 +204,9 @@ public class MeteoFragment extends Fragment{
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			web.loadUrl(home_url + "+" + searchText.getText().toString());
+			//web.loadUrl(home_url + "+" + searchText.getText().toString());
+
+			mListViewVilles.setAdapter(adapter);
 		}
 
 	}

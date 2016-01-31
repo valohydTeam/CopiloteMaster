@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,9 +29,10 @@ public class JSONParser {
     public JSONObject getJSONFromUrl(String urlStr) {
 
         // Making HTTP request
+        HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(urlStr);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection = (HttpURLConnection) url.openConnection();
 
             is = new BufferedInputStream(urlConnection.getInputStream());
 
@@ -42,7 +44,7 @@ public class JSONParser {
 
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
+                    is, Charset.defaultCharset()/*"iso-8859-1"*/), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {

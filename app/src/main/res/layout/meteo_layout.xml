@@ -3,13 +3,41 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    android:gravity="center"
+    android:gravity="top"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/search_meteo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_selector"
+            android:src="@drawable/ic_menu_search" />
+
+        <EditText
+            android:id="@+id/search_text_meteo"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_height="35dp"
+            android:layout_toLeftOf="@id/search_meteo"
+            android:layout_alignParentLeft="true"
+            android:background="@color/white"
+            android:hint="@string/hint_meteo"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences|textAutoCorrect" />
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listview_meteo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:divider="@android:color/transparent"
         android:background="#eaeaea"
         >
