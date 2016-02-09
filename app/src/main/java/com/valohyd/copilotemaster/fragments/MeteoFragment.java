@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.view.KeyEvent;
@@ -42,107 +48,141 @@ import com.valohyd.copilotemaster.utils.NetworkUtils;
 
 import org.json.JSONObject;
 
-public class MeteoFragment extends Fragment{
+public class MeteoFragment extends Fragment {
 
-	private static final String API_KEY = "34b48b18d65467d70d068c7471e9ea42";
+    private static final String API_KEY = "34b48b18d65467d70d068c7471e9ea42";
 
-	private static final String API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric";
+    private static final String API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric";
 
-	private View mainView;
+    private View mainView;
 
-	private Bundle etatSauvegarde; // Sauvegarde de la vue
+    private Bundle etatSauvegarde; // Sauvegarde de la vue
 
-	private EditText searchText; // Champs de recherche
+    private EditText searchText; // Champs de recherche
 
-	private ImageButton searchButton; // Bouton de recherche
+    private ImageButton searchButton; // Bouton de recherche
 
-	private ListView mListViewVilles; // listview de la mÃ©tÃ©o de chaque ville
+    private ImageButton searchButtonGPS; // Bouton de recherche GPS
 
-	//private String home_url = "http://www.google.fr/search?q=Meteo";
+    private ListView mListViewVilles; // listview de la mÃ©tÃ©o de chaque ville
 
-	private static final String URL_IDS = "http://www.valohyd.com/copilotemaster/weather_ids.txt";
+    //private String home_url = "http://www.google.fr/search?q=Meteo";
 
-	private ArrayList<String> ids_blocks; // ID des Block a cacher
+    private static final String URL_IDS = "http://www.valohyd.com/copilotemaster/weather_ids.txt";
 
-	public MeteoFragment() {}
+    private ArrayList<String> ids_blocks; // ID des Block a cacher
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		super.onCreateView(inflater, container, savedInstanceState);
+    public MeteoFragment() {
+    }
 
-		mainView = inflater.inflate(R.layout.meteo_layout, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
 
-		searchText = (EditText) mainView.findViewById(R.id.search_text_meteo);
-		searchText
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView v, int actionId,
-												  KeyEvent event) {
-						if (actionId == EditorInfo.IME_ACTION_DONE) {
-							if(NetworkUtils.networkConnectionAvailable(getActivity())){
-								performSearch();
-							}
-							else{
-								Toast.makeText(getActivity(), "Aucune connexion internet disponible !", Toast.LENGTH_LONG).show();
-							}
-							return true;
-						}
-						return false;
-					}
-				});
-		searchButton = (ImageButton) mainView.findViewById(R.id.search_meteo);
-		searchButton.setOnClickListener(new OnClickListener() {
+        mainView = inflater.inflate(R.layout.meteo_layout, container, false);
 
-			@Override
-			public void onClick(View v) {
-				if(NetworkUtils.networkConnectionAvailable(getActivity())){
-					performSearch();
-				}
-				else{
-					Toast.makeText(getActivity(), "Aucune connexion internet disponible !", Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
+        searchText = (EditText) mainView.findViewById(R.id.search_text_meteo);
+        searchText
+                .setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId,
+                                                  KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_DONE) {
+                            if (NetworkUtils.networkConnectionAvailable(getActivity())) {
+                                performSearch(false);
+                            } else {
+                                Toast.makeText(getActivity(), "Aucune connexion internet disponible !", Toast.LENGTH_LONG).show();
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+        searchButton = (ImageButton) mainView.findViewById(R.id.search_meteo);
+        searchButton.setOnClickListener(new OnClickListener() {
 
-		// rÃ©cupÃ©rer la listview des mÃ©teo
-		mListViewVilles = (ListView) mainView.findViewById(R.id.listview_meteo);
-		if(mListViewVilles != null){
+            @Override
+            public void onClick(View v) {
+                if (NetworkUtils.networkConnectionAvailable(getActivity())) {
+                    performSearch(false);
+                } else {
+                    Toast.makeText(getActivity(), "Aucune connexion internet disponible !", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        searchButtonGPS = (ImageButton) mainView.findViewById(R.id.search_gps);
+        searchButtonGPS.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (NetworkUtils.networkConnectionAvailable(getActivity())) {
+                    performSearch(true);
+                } else {
+                    Toast.makeText(getActivity(), "Aucune connexion internet disponible !", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // rÃ©cupÃ©rer la listview des mÃ©teo
+        mListViewVilles = (ListView) mainView.findViewById(R.id.listview_meteo);
+        if (mListViewVilles != null) {
             mListViewVilles.setEmptyView(mainView.findViewById(R.id.emptyView));
-			//MeteoListAdapter adapter = new MeteoListAdapter(getActivity(), new String[] {"Blop", "Antibes", "FrÃ©jus)"});
-			//mListViewVilles.setAdapter(adapter);
-		}
+            //MeteoListAdapter adapter = new MeteoListAdapter(getActivity(), new String[] {"Blop", "Antibes", "FrÃ©jus)"});
+            //mListViewVilles.setAdapter(adapter);
+        }
 
-		// POUR L'ICONE DU MENU !
-		setHasOptionsMenu(true);
-		return mainView;
-	}
+        // POUR L'ICONE DU MENU !
+        setHasOptionsMenu(true);
+        return mainView;
+    }
 
-	@Override
-	public void onPause() {
-		etatSauvegarde = new Bundle();
+    @Override
+    public void onPause() {
+        etatSauvegarde = new Bundle();
 
-		super.onPause();
-	}
+        super.onPause();
+    }
 
-	/**
-	 * permet de dire de redessiner le menu
-	 */
-	@Override
-	public void onHiddenChanged(boolean hidden) {
-		super.onHiddenChanged(hidden);
-		getActivity().supportInvalidateOptionsMenu();
-	}
+    /**
+     * permet de dire de redessiner le menu
+     */
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        getActivity().supportInvalidateOptionsMenu();
+    }
 
-	// Recherche
-	private void performSearch() {
-		if ( (searchText.getText().length() != 0) ){
-            new LoadWeatherAsynctask().execute(searchText.getText().toString());
-		}
+    // Recherche
+    private void performSearch(boolean fromGPS) {
+        if (fromGPS) {
+            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            if (locationManager != null) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Snackbar.make(getView(),"Pas la permission",Snackbar.LENGTH_SHORT).show();
+                }
+                else{
+                    Location lastKnownLocationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (lastKnownLocationGPS != null) {
+                        new LoadWeatherAsynctask().execute("lat=" + lastKnownLocationGPS.getLatitude() + "&lon=" + lastKnownLocationGPS.getLongitude());
+                    }
+                    else {
+                        Snackbar.make(getView(), "Pas de position", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+        }
+        else {
+            if ((searchText.getText().length() != 0)) {
+                new LoadWeatherAsynctask().execute(searchText.getText().toString());
+            }
+        }
 		// close keyboard
 		((InputMethodManager) getActivity().getSystemService(
-				Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
-				searchText.getWindowToken(), 0);
+                Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                searchText.getWindowToken(), 0);
 	}
 
 
