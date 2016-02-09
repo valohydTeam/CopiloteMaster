@@ -168,7 +168,12 @@ public class MeteoFragment extends Fragment {
                         new LoadWeatherAsynctask().execute("lat=" + lastKnownLocationGPS.getLatitude() + "&lon=" + lastKnownLocationGPS.getLongitude());
                     }
                     else {
-                        Snackbar.make(getView(), "Pas de position", Snackbar.LENGTH_SHORT).show();
+                        Location lastKnownLocationNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (lastKnownLocationNetwork != null) {
+                            new LoadWeatherAsynctask().execute("lat=" + lastKnownLocationNetwork.getLatitude() + "&lon=" + lastKnownLocationNetwork.getLongitude());
+                        } else {
+                            Snackbar.make(getView(), "Pas de position", Snackbar.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
