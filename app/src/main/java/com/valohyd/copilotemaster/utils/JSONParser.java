@@ -32,6 +32,7 @@ public class JSONParser {
         HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(urlStr);
+            Log.d("APPEL URL",urlStr);
             urlConnection = (HttpURLConnection) url.openConnection();
 
             is = new BufferedInputStream(urlConnection.getInputStream());

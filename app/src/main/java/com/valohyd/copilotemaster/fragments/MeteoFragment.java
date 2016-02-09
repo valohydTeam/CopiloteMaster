@@ -20,6 +20,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ListViewAutoScrollHelper;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -165,12 +166,15 @@ public class MeteoFragment extends Fragment {
                 else{
                     Location lastKnownLocationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     if (lastKnownLocationGPS != null) {
-                        new LoadWeatherAsynctask().execute("lat=" + lastKnownLocationGPS.getLatitude() + "&lon=" + lastKnownLocationGPS.getLongitude());
+                        Log.d("POSITION GPS",lastKnownLocationGPS.toString());
+
+                        new LoadWeatherAsynctask().execute("&lat=" + lastKnownLocationGPS.getLatitude() + "&lon=" + lastKnownLocationGPS.getLongitude());
                     }
                     else {
                         Location lastKnownLocationNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (lastKnownLocationNetwork != null) {
-                            new LoadWeatherAsynctask().execute("lat=" + lastKnownLocationNetwork.getLatitude() + "&lon=" + lastKnownLocationNetwork.getLongitude());
+                            Log.d("POSITION RESEAU",lastKnownLocationNetwork.toString());
+                            new LoadWeatherAsynctask().execute("&lat=" + lastKnownLocationNetwork.getLatitude() + "&lon=" + lastKnownLocationNetwork.getLongitude());
                         } else {
                             Snackbar.make(getView(), "Pas de position", Snackbar.LENGTH_SHORT).show();
                         }
@@ -181,7 +185,7 @@ public class MeteoFragment extends Fragment {
         }
         else {
             if ((searchText.getText().length() != 0)) {
-                new LoadWeatherAsynctask().execute(searchText.getText().toString());
+                new LoadWeatherAsynctask().execute("&q="+searchText.getText().toString());
             }
         }
 		// close keyboard
@@ -235,7 +239,7 @@ public class MeteoFragment extends Fragment {
 				if(params.length>0) {
 					ArrayList<WeatherCity> weatherCities = new ArrayList<>();
 					JSONParser parser = new JSONParser();
-					JSONObject json = parser.getJSONFromUrl(API_BASE_URL + "&q=" + params[0].trim() + "&appid=" + API_KEY + "&lang=" + getString(R.string.country_code));
+					JSONObject json = parser.getJSONFromUrl(API_BASE_URL + params[0].trim() + "&appid=" + API_KEY + "&lang=" + getString(R.string.country_code));
 					if(json!=null){
 						weatherCities.add(new WeatherCity(json));
 					}
