@@ -42,4 +42,18 @@
         android:background="#eaeaea"
         >
     </ListView>
+    <!-- empty view -->
+    <LinearLayout android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:background="#eaeaea"
+        android:layout_height="match_parent">
+
+        <TextView android:id="@+id/Button01"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="Ville non reconnue">
+        </TextView>
+    </LinearLayout>
 </LinearLayout>

@@ -108,6 +108,7 @@ public class MeteoFragment extends Fragment{
 		// rÃ©cupÃ©rer la listview des mÃ©teo
 		mListViewVilles = (ListView) mainView.findViewById(R.id.listview_meteo);
 		if(mListViewVilles != null){
+            mListViewVilles.setEmptyView(mainView.findViewById(R.id.emptyView));
 			//MeteoListAdapter adapter = new MeteoListAdapter(getActivity(), new String[] {"Blop", "Antibes", "FrÃ©jus)"});
 			//mListViewVilles.setAdapter(adapter);
 		}
@@ -187,12 +188,14 @@ public class MeteoFragment extends Fragment{
 			try {
 				//TEST
 				if(params.length>0) {
+					ArrayList<WeatherCity> weatherCities = new ArrayList<>();
 					JSONParser parser = new JSONParser();
 					JSONObject json = parser.getJSONFromUrl(API_BASE_URL + "&q=" + params[0].trim() + "&appid=" + API_KEY + "&lang=" + getString(R.string.country_code));
-					WeatherCity weatherCity = new WeatherCity(json);
-					System.out.println(weatherCity.toString());
+					if(json!=null){
+						weatherCities.add(new WeatherCity(json));
+					}
 					// créer l'adapter avec les villes
-					adapter = new MeteoListAdapter(getActivity(), new WeatherCity[] {weatherCity});
+					adapter = new MeteoListAdapter(getActivity(), weatherCities);
 				}
 			} catch (Exception ex) {
 				// there was some connection problem, or the file did not exist
