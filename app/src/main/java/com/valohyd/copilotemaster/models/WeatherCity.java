@@ -70,7 +70,7 @@ public class WeatherCity {
      */
     public WeatherTime getWorstWeatherOfDay(Long timestamp){
         WeatherTime worst = null;
-        if(weatherTimes != null){
+        if(weatherTimes != null && weatherTimes.size() > 0){
             // on récupère la premiière heure de la journée
             GregorianCalendar calTmp = new GregorianCalendar();
             calTmp.setTimeInMillis(timestamp);

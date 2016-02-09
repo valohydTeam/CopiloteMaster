@@ -93,7 +93,7 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
             // afficher les infos de ce jour
             // ** image
             ImageView imagView = (ImageView) rowView.findViewById(IDS_IMAGEVIEWS_JOURS[i]);
-            imagView.setImageResource(worstThisDay.getIconId());
+            imagView.setImageResource(worstThisDay == null ? WeatherTime.DEFAULT_ICON_ID : worstThisDay.getIconId());
             // ** jour
             textView = (TextView) rowView.findViewById(IDS_TEXTVIEWS_JOURS[i]);
             SimpleDateFormat formatJour = new SimpleDateFormat("E", getContext().getResources().getConfiguration().locale);

@@ -12,6 +12,7 @@ import java.util.HashMap;
  * Created by parodilaurent on 24/01/2016.
  */
 public class WeatherTime {
+    public static final int DEFAULT_ICON_ID = R.drawable.temps_9_brouillard; // todo faire une icone par défaut quand erreur
 
     private long timestamp;
     private double temp;
