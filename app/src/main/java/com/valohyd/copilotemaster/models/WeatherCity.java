@@ -71,18 +71,20 @@ public class WeatherCity {
     public WeatherTime getWorstWeatherOfDay(Long timestamp){
         WeatherTime worst = null;
         if(weatherTimes != null && weatherTimes.size() > 0){
-            // on récupère la premiière heure de la journée
+            // on récupère la première heure de la journée
             GregorianCalendar calTmp = new GregorianCalendar();
             calTmp.setTimeInMillis(timestamp);
-            GregorianCalendar calToday = new GregorianCalendar(calTmp.get(Calendar.YEAR), calTmp.get(Calendar.MONTH), calTmp.get(Calendar.DAY_OF_MONTH));
+            GregorianCalendar calToday = new GregorianCalendar(calTmp.get(Calendar.YEAR), calTmp.get(Calendar.MONTH), calTmp.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
             // récupérer aussi demain
             GregorianCalendar calTomorrow = (GregorianCalendar)calToday.clone();
             calTomorrow.roll(Calendar.DAY_OF_YEAR, 1);
 
+            long timeStampToday = calToday.getTimeInMillis(), timeStampTomorrow = calTomorrow.getTimeInMillis();
+
             // récupérer le pire temps d'aujourd'hui
             for(Long timestp : weatherTimes.keySet()){
                 // si la météo concerne bien aujourd'hui
-                if( (timestp > calToday.getTimeInMillis()) && (timestp < calTomorrow.getTimeInMillis()) ){
+                if( (timestp > timeStampToday) && (timestp < timeStampTomorrow) ){
                     // on récupère le pire
                     if(worst == null){
                         worst = weatherTimes.get(timestp);
@@ -94,8 +96,10 @@ public class WeatherCity {
                             worst = wt;
                         }
                     }
+                }else if(timestp > timeStampTomorrow){
+                    // arreter la boucle si timestamp >= tomorow, puisque c'est trié
+                    break;
                 }
-                // todo peut-être arreter la boucle si timestamp >= tomorow, puisque c'est trié (?)
             }
         }
         return worst;
