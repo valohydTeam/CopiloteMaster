@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.valohyd.copilotemaster.R;
@@ -42,7 +43,7 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
         if(rowView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext
@@ -55,19 +56,19 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
         TextView textView = (TextView) rowView.findViewById(R.id.textview_ville);
         textView.setText(mVilles.get(position).getCityName());
 
-        // * récupérer le pire temps du jour
-        GregorianCalendar today = new GregorianCalendar();
+        // ** récupérer le pire temps du jour
+        final GregorianCalendar today = new GregorianCalendar();
         // on n'a pas de worst si :
-// 1. pas de données, donc c'est la merde
-// 2. pas de données pour aujourd'hui, donc on affiche à partir de demain
-// => donc on essaie avec aujourd'hui, si null, on essaie avec demain, si null alors pas de données
+        //   1. pas de données, donc c'est la merde
+        //   2. pas de données pour aujourd'hui, donc on affiche à partir de demain
+        // => donc on essaie avec aujourd'hui, si null, on essaie avec demain, si null alors pas de données
         WeatherTime worstToday = mVilles.get(position).getWorstWeatherOfDay(today.getTimeInMillis());
         if(worstToday == null){
-// on avance à demain
+            // on avance à demain
             today.roll(GregorianCalendar.DAY_OF_YEAR, 1);
             worstToday = mVilles.get(position).getWorstWeatherOfDay(today.getTimeInMillis());
         }
-// si worstToday est toujours null, alors on n'a pas de données => on affiche la carte no data
+        // si worstToday est toujours null, alors on n'a pas de données => on affiche la carte no data
         if(worstToday == null){
             //rowView
         }
@@ -75,12 +76,7 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
         textView = (TextView) rowView.findViewById(R.id.textview_detail_meteo);
         String detailMeteo = "-";
         if(worstToday != null){
-            // format : <Lun 13h : Ensoleillé>
-            SimpleDateFormat formatJour = new SimpleDateFormat("E H", getContext().getResources().getConfiguration().locale);
-            StringBuilder builder = new StringBuilder(formatJour.format(new Date(worstToday.getTimestampInMillis())));
-            builder.append("h : ");
-            builder.append(worstToday.getDescription());
-            detailMeteo = builder.toString();
+            detailMeteo = getDetailMeteo(getContext(), worstToday);
         }
         textView.setText(detailMeteo);
 
@@ -113,8 +109,124 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
             textView.setText(formatJour.format(new Date(thisDay.getTimeInMillis())));
         }
 
+        // ajouter le listener du seekbar pour les heures et le limiter à l'heure actuelle
+        final SeekBar seekBar = (SeekBar) rowView.findViewById(R.id.seekbar_meteo_heure);
+        final View finalRowView = rowView;
+        if(seekBar != null){
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    // on récupère le holder pour savoir si un jour a été séléctionné
+                    HolderMeteo holder = null;
+                    if(finalRowView.getTag() != null){
+                        holder = (HolderMeteo) finalRowView.getTag();
+                    }
+                    int jourDemandé = (holder == null ? 0 : holder.jourSelectionne);
+
+                    // récupérer la météo de l'heure demandée
+                    GregorianCalendar premierJourMeteo = (GregorianCalendar) today.clone();
+                    premierJourMeteo.roll(GregorianCalendar.DAY_OF_YEAR, jourDemandé);
+                    premierJourMeteo.set(GregorianCalendar.HOUR_OF_DAY, (i * 3)); // todo je pense que ca ne va pas marcher, puisque si il est 13, que tu cherches 11h, on l'a pas...
+
+                    WeatherTime meteo = mVilles.get(position).getNextWeatherTime(premierJourMeteo.getTimeInMillis());
+
+                    // changer la grosse image
+                    String detailMeteo = "-";
+                    TextView textView = (TextView) finalRowView.findViewById(R.id.textview_detail_meteo);
+                    if(meteo != null){
+                        detailMeteo = getDetailMeteo(getContext(), meteo);
+                    }
+                    textView.setText(detailMeteo);
+
+                    // ** temperature
+                    textView = (TextView)  finalRowView.findViewById(R.id.textview_meteo_temperature);
+                    textView.setText(meteo == null ? "-" : Math.round(meteo.getTemp()) + "°");
+
+                    // ** image meteo
+                    ImageView imv = (ImageView) finalRowView.findViewById(R.id.image_meteo_big);
+                    if(meteo != null) {
+                        imv.setImageResource(meteo.getIconId());
+                    }
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    // ballec
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    // ballec
+                }
+            });
+        }
+
+        // clic sur les jours en bas => changer le jour affiché
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HolderMeteo holder = new HolderMeteo();
+                // on teste l'id et on set le jour qui correspond
+                if(view.getId() == R.id.imageview_meteo_j1){
+                    holder.jourSelectionne = 0;
+                }
+                else if(view.getId() == R.id.imageview_meteo_j2){
+                    holder.jourSelectionne = 1;
+                }
+                else if(view.getId() == R.id.imageview_meteo_j3){
+                    holder.jourSelectionne = 2;
+                }
+                else if(view.getId() == R.id.imageview_meteo_j4){
+                    holder.jourSelectionne = 3;
+                }
+                else if(view.getId() == R.id.imageview_meteo_j5){
+                    holder.jourSelectionne = 4;
+                }
+
+                // donner le holder
+                finalRowView.setTag(holder);
+                // on change le progress pour déclencher le listener
+                if(seekBar != null){
+                    if(seekBar.getProgress() == 0){
+                        seekBar.setProgress(1);
+                    }
+                    seekBar.setProgress(0);
+                }
+            }
+        };
+        ImageView imageJ = (ImageView) rowView.findViewById(R.id.imageview_meteo_j1);
+        imageJ.setOnClickListener(listener);
+        imageJ = (ImageView) rowView.findViewById(R.id.imageview_meteo_j2);
+        imageJ.setOnClickListener(listener);
+        imageJ = (ImageView) rowView.findViewById(R.id.imageview_meteo_j3);
+        imageJ.setOnClickListener(listener);
+        imageJ = (ImageView) rowView.findViewById(R.id.imageview_meteo_j4);
+        imageJ.setOnClickListener(listener);
+        imageJ = (ImageView) rowView.findViewById(R.id.imageview_meteo_j5);
+        imageJ.setOnClickListener(listener);
+
+
 
         // todo completer la vue avec les infos de WeatherCity
         return rowView;
+    }
+
+    /**
+     * retourne la chaine "détail" formatée de la météo donnée en paramètre
+     * @param ctxt context
+     * @param toFormat meteo à formater
+     * @return string formatée prête à être affichée
+     */
+    private static String getDetailMeteo(Context ctxt, WeatherTime toFormat){
+        // format : <Lun 13h : Ensoleillé>
+        SimpleDateFormat formatJour = new SimpleDateFormat("E H", ctxt.getResources().getConfiguration().locale);
+        StringBuilder builder = new StringBuilder(formatJour.format(new Date(toFormat.getTimestampInMillis())));
+        builder.append("h : ");
+        builder.append(toFormat.getDescription());
+        return builder.toString();
+    }
+
+    private class HolderMeteo {
+        int jourSelectionne; // index du jour cliqué
     }
 }

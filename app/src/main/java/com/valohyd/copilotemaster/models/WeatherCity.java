@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -60,7 +61,11 @@ public class WeatherCity {
      * @return
      */
     public WeatherTime getNextWeatherTime(Long timestamp){
-        return this.weatherTimes.ceilingEntry(timestamp).getValue();
+        Map.Entry<Long, WeatherTime> next = this.weatherTimes.ceilingEntry(timestamp);
+        if(next != null) {
+            return next.getValue();
+        }
+        return null;
     }
 
     /**
