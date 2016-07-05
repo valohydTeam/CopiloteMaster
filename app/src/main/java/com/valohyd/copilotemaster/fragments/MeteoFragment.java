@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 import android.Manifest;
@@ -20,6 +21,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ListViewAutoScrollHelper;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -157,6 +159,9 @@ public class MeteoFragment extends Fragment {
 
     // Recherche
     private void performSearch(boolean fromGPS) {
+        String country = getUserCountry(getContext());
+        country = country!=null?country:"";
+        Log.e("COUNTRY",country);
         if (fromGPS) {
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             if (locationManager != null) {
@@ -185,7 +190,7 @@ public class MeteoFragment extends Fragment {
         }
         else {
             if ((searchText.getText().length() != 0)) {
-                new LoadWeatherAsynctask().execute("&q="+searchText.getText().toString());
+                new LoadWeatherAsynctask().execute("&q="+searchText.getText().toString()+ ","+country);
             }
         }
 		// close keyboard
@@ -263,4 +268,32 @@ public class MeteoFragment extends Fragment {
 
 	}
 
+    /**
+     * Get ISO 3166-1 alpha-2 country code for this device (or null if not available)
+     * @param context Context reference to get the TelephonyManager instance from
+     * @return country code or null
+     */
+    public static String getUserCountry(Context context) {
+        String country = null;
+        try {
+            final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            final String simCountry = tm.getSimCountryIso();
+            if (simCountry != null && simCountry.length() == 2) { // SIM country code is available
+                country = simCountry.toLowerCase(Locale.US);
+            }
+            else if (tm.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA) { // device is not 3G (would be unreliable)
+                String networkCountry = tm.getNetworkCountryIso();
+                if (networkCountry != null && networkCountry.length() == 2) { // network country code is available
+                    country = networkCountry.toLowerCase(Locale.US);
+                }
+            }
+        }
+        catch (Exception e) { }
+        finally {
+            if(country==null){
+               country = context.getResources().getConfiguration().locale.getCountry();
+            }
+            return country;
+        }
+    }
 }
