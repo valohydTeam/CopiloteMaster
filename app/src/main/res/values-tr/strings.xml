@@ -86,6 +86,7 @@
     <string name="homepage_titre_settings">AnaSayfayı değiştir</string>
     <string name="first_help_pref_title">Kullanım klavuzu</string>
     <string name="quit_message">Çıkmak için tekrar basın</string>
+    <string name="meteo_search_gps_explanation">Biz şehir bulmak için konumunuzu gerek.</string>
     
     <string name="hint_meteo">Şehir</string>
 
