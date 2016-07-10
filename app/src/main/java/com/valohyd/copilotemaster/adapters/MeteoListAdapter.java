@@ -13,14 +13,11 @@ import com.valohyd.copilotemaster.R;
 import com.valohyd.copilotemaster.models.WeatherCity;
 import com.valohyd.copilotemaster.models.WeatherTime;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 /**
  * Created by val on 24/01/2016.
@@ -113,6 +110,26 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
         final SeekBar seekBar = (SeekBar) rowView.findViewById(R.id.seekbar_meteo_heure);
         final View finalRowView = rowView;
         if(seekBar != null){
+            // placer le seekbar en rapport avec le worstToday
+            // ** recupeter l'heure concernee
+            {
+                SimpleDateFormat formatJour = new SimpleDateFormat("H", mContext.getResources().getConfiguration().locale);
+                String heure = formatJour.format(new Date(worstToday.getTimestampInMillis()));
+                int index = 0;
+                try {
+                    index = Integer.parseInt(heure) / 3;
+                    if(index < 0){
+                        index = 0;
+                    }
+                    else if(index > 7){
+                        index = 7;
+                    }
+                } catch (Exception e) {
+                    // mauvaise heure, on garde 0 comme index
+                }
+                seekBar.setProgress(index);
+            }
+
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -187,10 +204,11 @@ public class MeteoListAdapter extends ArrayAdapter<WeatherCity> {
                 finalRowView.setTag(holder);
                 // on change le progress pour déclencher le listener
                 if(seekBar != null){
-                    if(seekBar.getProgress() == 0){
-                        seekBar.setProgress(1);
+                    // par défaut, on affiche la meteo de 14h (parce que 2h du mat, useless)
+                    if(seekBar.getProgress() == 4){
+                        seekBar.setProgress(3);
                     }
-                    seekBar.setProgress(0);
+                    seekBar.setProgress(4);
                 }
             }
         };

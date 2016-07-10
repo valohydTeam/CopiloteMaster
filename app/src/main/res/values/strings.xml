@@ -85,7 +85,8 @@
     <string name="homepage_titre_settings">Change homepage</string>
     <string name="first_help_pref_title">First help</string>
     <string name="quit_message">Pressed back again to exit</string>
-    
+    <string name="meteo_search_gps_explanation">We need your location to find your city.</string>
+
     <string name="hint_meteo">City</string>
 
     <!-- help -->

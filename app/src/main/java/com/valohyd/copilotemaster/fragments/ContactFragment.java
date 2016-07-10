@@ -2,16 +2,21 @@ package com.valohyd.copilotemaster.fragments;
 
 import java.util.ArrayList;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -40,6 +45,7 @@ import com.valohyd.copilotemaster.sqlite.ContactsBDD;
  * 
  */
 public class ContactFragment extends Fragment{
+	private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 124;
 
 	ContactsBDD bdd;
 
@@ -443,9 +449,16 @@ public class ContactFragment extends Fragment{
 				public void onClick(View v) {
 					String uri = "tel:"
 							+ mList.get(position).getNumber().trim();
-					Intent intent = new Intent(Intent.ACTION_CALL);
-					intent.setData(Uri.parse(uri));
-					mContext.startActivity(intent);
+					// vérifier si on a la permission d'appeler
+					if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+						requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
+								MY_PERMISSIONS_REQUEST_CALL_PHONE);
+					}
+					else {
+						Intent intent = new Intent(Intent.ACTION_CALL);
+						intent.setData(Uri.parse(uri));
+						mContext.startActivity(intent);
+					}
 				}
 			});
 
@@ -498,5 +511,36 @@ public class ContactFragment extends Fragment{
 
 		};
 
+	}
+
+	/**
+	 * call when the user grant or not the permission asked
+	 * @param requestCode
+	 * @param permissions
+	 * @param grantResults
+	 */
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+					// permission was granted, yay! Do the
+					// contacts-related task you need to do.
+					// l'utilisateur va devoir recliquer sur "appeler"
+				} else {
+
+					// permission denied, boo! Disable the
+					// functionality that depends on this permission.
+				}
+				return;
+			}
+
+			// other 'case' lines to check for other
+			// permissions this app might request
+		}
 	}
 }

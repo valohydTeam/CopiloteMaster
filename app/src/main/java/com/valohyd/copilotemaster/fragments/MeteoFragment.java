@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -52,6 +53,7 @@ import com.valohyd.copilotemaster.utils.NetworkUtils;
 import org.json.JSONObject;
 
 public class MeteoFragment extends Fragment {
+    private static final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION_FOR_SEARCH =   123;
 
     private static final String API_KEY = "34b48b18d65467d70d068c7471e9ea42";
 
@@ -165,8 +167,20 @@ public class MeteoFragment extends Fragment {
         if (fromGPS) {
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             if (locationManager != null) {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Snackbar.make(getView(),"Pas la permission",Snackbar.LENGTH_SHORT).show();
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // Should we show an explanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+                        // Show an expanation to the user *asynchronously* -- don't block
+                        // this thread waiting for the user's response! After the user
+                        // sees the explanation, try again to request the permission.
+                        Snackbar.make(getView(), R.string.meteo_search_gps_explanation, Snackbar.LENGTH_LONG).show();
+                    }
+                    // on demande tout le temps quand même la permission
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_COARSE_LOCATION_FOR_SEARCH);
+
                 }
                 else{
                     Location lastKnownLocationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -204,15 +218,18 @@ public class MeteoFragment extends Fragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		MenuItem item = menu.findItem(R.id.refresh_web);
-		item.setVisible(true);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				// todo web.reload();
-				return false;
-			}
-		});
+        // API meteo version, no refresh
+        //item.setVisible(true);
+        item.setVisible(false);
+//		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//
+//			@Override
+//			public boolean onMenuItemClick(MenuItem item) {
+//				// todo web.reload();
+//                // Version avec API meteo, pas de refresh
+//				return false;
+//			}
+//		});
 
 		item = menu.findItem(R.id.help);
 		item.setVisible(true);
@@ -294,6 +311,37 @@ public class MeteoFragment extends Fragment {
                country = context.getResources().getConfiguration().locale.getCountry();
             }
             return country;
+        }
+    }
+
+    /**
+     * call when the user grant or not the permission asked
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_COARSE_LOCATION_FOR_SEARCH: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    performSearch(true);
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
 }

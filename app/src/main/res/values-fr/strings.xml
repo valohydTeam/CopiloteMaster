@@ -86,6 +86,7 @@
     <string name="homepage_titre_settings">Changer page d\'accueil</string>
     <string name="first_help_pref_title">Aide au 1er démarrage</string>
     <string name="quit_message">Appuyer une deuxième fois pour quitter</string>
+    <string name="meteo_search_gps_explanation">Nous avons besoin de votre position pour trouver votre ville.</string>
     
     <!-- help -->
     <string name="help_first_user_title">Comment utiliser l\'application ?</string>

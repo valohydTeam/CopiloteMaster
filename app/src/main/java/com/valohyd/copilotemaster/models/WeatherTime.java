@@ -29,32 +29,32 @@ public class WeatherTime {
     static {
         ICONS = new HashMap<>();
         //SOLEIL
-        ICONS.put("01d", R.drawable.temps_1_soleil);
-        ICONS.put("01n", R.drawable.temps_1_soleil);
+        ICONS.put("01d", R.drawable.temps_1_soleil_feedback);
+        ICONS.put("01n", R.drawable.temps_1_soleil_feedback);
         //NUAGEUX/SOLEIL
-        ICONS.put("02d", R.drawable.temps_2_soleil_nuage);
-        ICONS.put("02n", R.drawable.temps_2_soleil_nuage);
+        ICONS.put("02d", R.drawable.temps_2_soleil_nuage_feedback);
+        ICONS.put("02n", R.drawable.temps_2_soleil_nuage_feedback);
         //NUAGEUX
-        ICONS.put("03d", R.drawable.temps_3_nuageux);
-        ICONS.put("03n", R.drawable.temps_3_nuageux);
+        ICONS.put("03d", R.drawable.temps_3_nuageux_feedback);
+        ICONS.put("03n", R.drawable.temps_3_nuageux_feedback);
         //GROS NUAGE
-        ICONS.put("04d", R.drawable.temps_4_tres_nuageux);
-        ICONS.put("04n", R.drawable.temps_4_tres_nuageux);
+        ICONS.put("04d", R.drawable.temps_4_tres_nuageux_feedback);
+        ICONS.put("04n", R.drawable.temps_4_tres_nuageux_feedback);
         //LEGERES PLUIES
-        ICONS.put("09d", R.drawable.temps_5_pluie);
-        ICONS.put("09n", R.drawable.temps_5_pluie);
+        ICONS.put("09d", R.drawable.temps_5_pluie_feedback);
+        ICONS.put("09n", R.drawable.temps_5_pluie_feedback);
         //PLUIE/SOLEIL
-        ICONS.put("10d", R.drawable.temps_6_pluie_soleil);
-        ICONS.put("10n", R.drawable.temps_6_pluie_soleil);
+        ICONS.put("10d", R.drawable.temps_6_pluie_soleil_feedback);
+        ICONS.put("10n", R.drawable.temps_6_pluie_soleil_feedback);
         //ORAGES
-        ICONS.put("11d", R.drawable.temps_7_orage);
-        ICONS.put("11n", R.drawable.temps_7_orage);
+        ICONS.put("11d", R.drawable.temps_7_orage_feedback);
+        ICONS.put("11n", R.drawable.temps_7_orage_feedback);
         //NEIGE
-        ICONS.put("13d", R.drawable.temps_8_neige);
-        ICONS.put("13n", R.drawable.temps_8_neige);
+        ICONS.put("13d", R.drawable.temps_8_neige_feedback);
+        ICONS.put("13n", R.drawable.temps_8_neige_feedback);
         //BROUILLARD
-        ICONS.put("50d", R.drawable.temps_9_brouillard);
-        ICONS.put("50n", R.drawable.temps_9_brouillard);
+        ICONS.put("50d", R.drawable.temps_9_brouillard_feedback);
+        ICONS.put("50n", R.drawable.temps_9_brouillard_feedback);
     }
 
     public WeatherTime(long timestamp,double temp,double tempMin, double tempMax, int humidity, String summary, String description, String icon){

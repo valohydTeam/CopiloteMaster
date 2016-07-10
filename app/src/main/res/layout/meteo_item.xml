@@ -62,56 +62,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="1h"
+                android:text="2h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="4h"
+                android:text="5h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="7h"
+                android:text="8h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="10h"
+                android:text="11h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="13h"
+                android:text="14h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="16h"
+                android:text="17h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="19h"
+                android:text="20h"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/textview_meteo_heure_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="22h"
+                android:text="23h"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -204,6 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+
                 android:src="@android:drawable/btn_star_big_on"/>
 
             <TextView
