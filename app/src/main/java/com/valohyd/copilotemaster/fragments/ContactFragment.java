@@ -46,6 +46,7 @@ import com.valohyd.copilotemaster.sqlite.ContactsBDD;
  */
 public class ContactFragment extends Fragment{
 	private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 124;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 64;
 
 	ContactsBDD bdd;
 
@@ -187,36 +188,36 @@ public class ContactFragment extends Fragment{
 							
 							dialogMessages
 									.setNegativeButton(
-											R.string.close,
-											new DialogInterface.OnClickListener() {
+                                            R.string.close,
+                                            new DialogInterface.OnClickListener() {
 
-												@Override
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													dialog.dismiss();
-												}
-											});
+                                                @Override
+                                                public void onClick(
+                                                        DialogInterface dialog,
+                                                        int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
 
 							dialogMessages
 									.setAdapter(
-											arrayAdapter,
-											new DialogInterface.OnClickListener() {
+                                            arrayAdapter,
+                                            new DialogInterface.OnClickListener() {
 
-												@Override
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													String message = arrayAdapter
-															.getItem(which);
-													smsIntent.putExtra(
-															"sms_body",
-															message);
-													getActivity()
-															.startActivity(
-																	smsIntent);
-												}
-											});
+                                                @Override
+                                                public void onClick(
+                                                        DialogInterface dialog,
+                                                        int which) {
+                                                    String message = arrayAdapter
+                                                            .getItem(which);
+                                                    smsIntent.putExtra(
+                                                            "sms_body",
+                                                            message);
+                                                    getActivity()
+                                                            .startActivity(
+                                                                    smsIntent);
+                                                }
+                                            });
 							dialogMessages.show();
 						}
 					}
@@ -310,9 +311,16 @@ public class ContactFragment extends Fragment{
 	 * Lecture du répertoire du tel
 	 */
 	public void readcontact() {
-		Intent intent = new Intent(Intent.ACTION_PICK,
-				ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-		startActivityForResult(intent, PICK_CONTACT);
+        // vérifier si on a la permission d'appeler
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
+        else {
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+            startActivityForResult(intent, PICK_CONTACT);
+        }
 
 	}
 
@@ -452,7 +460,7 @@ public class ContactFragment extends Fragment{
 					// vérifier si on a la permission d'appeler
 					if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 						requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
-								MY_PERMISSIONS_REQUEST_CALL_PHONE);
+                                MY_PERMISSIONS_REQUEST_CALL_PHONE);
 					}
 					else {
 						Intent intent = new Intent(Intent.ACTION_CALL);
